@@ -1,0 +1,25 @@
+<div class="user-panel">
+  <div class="container">
+    <p>
+      Usuario: {{user}}
+    </p>
+  </div>
+
+  <div class="container">
+    <p>
+      Sesiones Iniciadas: {{numberOfLogins}}
+    </p>
+  </div>
+
+  <div class="container">
+    <p>
+      Último Acceso: {{(lastAccess? (lastAccess | date:'dd/MM/yyyy, h:mm a'): 'Calculando...' )}}
+    </p>
+  </div>
+  <div class="container right">
+    <a class="btn-design btn-design-game" (click)="onClick()">Chat</a>
+  </div>
+  <div class="container right">
+    <a class="btn-design btn-design-back" (click)="logout()">Logout</a>
+  </div>
+</div>

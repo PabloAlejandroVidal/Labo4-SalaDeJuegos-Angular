@@ -1,0 +1,91 @@
+.game {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  height: 100%;
+}
+
+.info-container{
+  width: 98%;
+  margin: 1%;
+  border-radius: .5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .2em;
+  gap: .2em;
+  background-color: rgb(39, 81, 99);
+}
+.info-display{
+  flex-grow: 1;
+  flex-basis: 50%;
+  padding: .2em .6em;
+  border-radius: .5em;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgb(125, 255, 138);
+}
+app-game-menu{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.game-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.country-info {
+  padding: 1em 2em;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: .5em;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.img-country {
+  width: 200px;
+  height: auto;
+  border: 2px solid #ffffff;
+  margin-top: 10px;
+}
+
+.options-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.option {
+  flex-basis: 1;
+  flex-grow: 1;
+  flex-shrink: 0;
+  background-color: #f0f0f0;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.option:hover {
+  background-color: #dcdcdc;
+  border-color: #333;
+}
+
+.option p {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+}

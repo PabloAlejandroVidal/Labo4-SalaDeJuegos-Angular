@@ -1,0 +1,82 @@
+.select-container{
+  position: relative;
+  padding: .2em;
+  height: 30vh;
+  max-height: none;
+  width: 100%;
+  border-radius: .2em;
+  background-color: rgba(255, 255, 255, 0.484);
+  box-shadow: 0 0 0 .75px rgb(121, 121, 121);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .2em;
+}
+
+
+.search-section{
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+.search-input{
+  padding: .1em;
+  max-width: 100%;
+}
+
+.options-section{
+  height: 100%;
+  width: 100%;
+  overflow-y:  scroll;
+}
+.options-list{
+  min-width: 100%;
+  padding: .2em;
+  border-radius: .2em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: .5em;
+}
+
+.option-container{
+  display: flex;
+  gap: .5em;
+  width: min-content;
+  justify-content: stretch;
+  align-items: stretch;
+}
+.flag-container{
+  height: 60px;
+  width: 120px;
+  margin: auto;
+  padding-block: 4px;
+  border-radius: .2em;
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 0 .75px rgb(121, 121, 121);
+  overflow: hidden;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.flag-image{
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  object-fit: contain;
+}
+
+
+.wof-container{
+  overflow: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer y Edge */
+}
+.wof-container::-webkit-scrollbar {
+  display: none;  /* Oculta la barra de scroll */
+}

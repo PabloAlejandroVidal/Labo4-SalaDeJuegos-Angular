@@ -1,0 +1,86 @@
+
+<h2 class="ranking-title">Rankings</h2>
+
+<div class="ranking-container">
+  <h3 class="ranking-subtitle">Mayor o Menor</h3>
+  <table class="ranking-table">
+    <thead>
+      <tr>
+        <th class="ranking-th">Usuario</th>
+        <th class="ranking-th">Puntaje</th>
+        <th class="ranking-th">Registrado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let score of mayorMenorScores">
+        <td>{{ score.user }}</td>
+        <td>{{ score.score }}</td>
+        <td>{{ score.registered | date: 'dd/MM/yyyy, h:mm a' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  <div class="ranking-container">
+  <h3 class="ranking-subtitle">Ahorcado</h3>
+  <table class="ranking-table">
+    <thead>
+      <tr>
+        <th class="ranking-th">Usuario</th>
+        <th class="ranking-th">Puntaje</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let score of ahorcadoScores">
+        <td>{{ score.user }}</td>
+        <td>{{ score.ganadas }} / {{score.total}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</div>
+
+<div class="ranking-container">
+  <h3 class="ranking-subtitle">Conecta Cuatro</h3>
+  <table class="ranking-table">
+    <thead>
+      <tr>
+        <th class="ranking-th">Usuario</th>
+        <th class="ranking-th">Partidas</th>
+        <th class="ranking-th">Rojo gano</th>
+        <th class="ranking-th">Amarillo gano</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let score of conectaCuatroScores">
+        <td> {{score.user }}</td>
+        <td> {{score.total}}</td>
+        <td> {{score.rojo}}</td>
+        <td> {{score.amarillo}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<div class="ranking-container">
+  <h3 class="ranking-subtitle">Preguntados (Paises)</h3>
+  <table class="ranking-table">
+    <thead>
+      <tr>
+        <th class="ranking-th">Usuario</th>
+        <th class="ranking-th">Puntaje</th>
+        <th class="ranking-th">Registrado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let score of preguntadosScores">
+        <td> {{score.user }}</td>
+        <td> {{score.score}} / 10</td>
+        <td> {{score.registered | date: 'dd/MM/yyyy, h:mm a' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

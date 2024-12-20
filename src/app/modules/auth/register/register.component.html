@@ -1,0 +1,40 @@
+<div class="form-page">
+
+  <div class="form-container">
+
+    <h3 class="form-title">Registrate</h3>
+
+    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()" >
+
+      <div class="form-row">
+        <label class="form-label row-cell" for="email">Email</label>
+        <input class="form-input row-cell" name="email" id="email" type="email" formControlName="email" />
+      </div>
+      <div class="row-small" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+        <small class="small-block" *ngIf="form.get('email')?.errors?.['required']">Este campo es obligatorio</small>
+        <small class="small-block" *ngIf="form.get('email')?.errors?.['minlength']">Debe tener al menos 8 caracteres</small>
+        <small class="small-block" *ngIf="form.get('email')?.errors?.['email']">Debe ser un correo electrónico válido</small>
+      </div>
+      <div class="form-row">
+        <label class="form-label row-cell" for="password">Password</label>
+        <input class="form-input row-cell" name="password" id="password" type="password" formControlName="password" />
+    </div>
+    <div class="row-small" *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+      <small class="small-block" *ngIf="form.get('password')?.errors?.['required']">Este campo es obligatorio</small>
+      <small class="small-block" *ngIf="form.get('password')?.errors?.['minlength']">Debe tener al menos 6 caracteres</small>
+    </div>
+    <div class="form-row">
+      <button type="submit" class="form-input form-submit form-register__button btn btn-design btn-design-form" [disabled]="form.invalid">Registrar Usuario</button>
+    </div>
+
+
+
+    @if (msgResult) {
+    <div>
+      <p>{{msgResult}}</p>
+    </div>
+  }
+</form>
+</div>
+
+</div>

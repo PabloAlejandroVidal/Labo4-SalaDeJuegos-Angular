@@ -1,0 +1,9 @@
+@use 'index' as *; // Ajusta la ruta según tu estructura de archivos
+
+.lista-juegos{
+  display: flex;
+  justify-content: space-around;
+  padding: 1em;
+  gap: 1em;
+  flex-wrap: wrap;
+}

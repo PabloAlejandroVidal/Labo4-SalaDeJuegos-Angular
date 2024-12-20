@@ -1,0 +1,66 @@
+.encuestas-respuestas-container{
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: baseline;
+  gap: 1em;
+}
+.loading-spinner {
+  text-align: center;
+  font-size: 18px;
+}
+
+.no-encuestas {
+  text-align: center;
+  font-size: 18px;
+  color: gray;
+}
+
+.title{
+  text-align: center;
+}
+.encuesta-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.encuesta-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: .2em;
+  padding: 15px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  background-color: #5affd373;
+  background-color: #91cf68;
+}
+.encuesta-card:nth-child(even) {
+  background-color: #666cc4;
+
+}
+.encuesta-card>:nth-child(even){
+  padding: .2em;
+  border-radius: .2em;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.encuesta-card>:nth-child(odd){
+  padding: .2em;
+  border-radius: .2em;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.encuesta-card h3 {
+  margin-bottom: 10px;
+}
+
+.encuesta-card p {
+  margin: 5px 0;
+}
+
+.encuesta-card ul {
+  list-style-type: none;
+  padding-left: 0;
+}

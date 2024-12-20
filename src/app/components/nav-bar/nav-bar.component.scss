@@ -1,0 +1,32 @@
+@use 'index' as *; // Ajusta la ruta según tu estructura de archivos
+@use '@angular/material' as mat;
+
+.header{
+  color: $nav-color;
+  background-color: $nav-btn-color;
+}
+.header__li{
+  display: flex;
+  justify-content: right;
+}
+.header__ul{
+  min-width: 6em;
+  list-style: none;
+  text-align: center;
+  padding: .5em 1em;
+}
+.header__ul:hover{
+  background-color: $nav-btn-color-hover;
+  cursor: pointer;
+}
+.header__ul:active{
+  background-color: $nav-btn-color-active;
+}
+
+@media only screen and (max-width: 600px) {
+  .header__li{
+    display: flex;
+    justify-content: right;
+    flex-direction: column;
+  }
+}

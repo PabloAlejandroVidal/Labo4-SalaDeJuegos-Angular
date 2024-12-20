@@ -1,0 +1,18 @@
+
+// Mixin para bordes redondeados
+@mixin rounded($radius) {
+  border-radius: $radius;
+}
+
+// Mixin para sombra de caja
+@mixin box-shadow($x, $y, $blur, $color) {
+  box-shadow: $x $y $blur $color;
+}
+
+// Mixin para el centro de un contenedor
+@mixin center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

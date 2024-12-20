@@ -1,0 +1,32 @@
+@use 'index' as *; // Ajusta la ruta según tu estructura de archivos
+
+.user-panel{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: .5em;
+  gap: .5em;
+  border-radius: .5em;
+  background-color: $user-bg-color;
+}
+.container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  flex-basis: 1;
+  flex-shrink: 1;
+  flex-grow: 1;
+  padding: .5em;
+  border-radius: .5em;
+  background-color: $user-bg-color-alter;
+  color: $play-txt-color;
+  inline-size: none;
+}
+.right{
+  justify-content: end;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+

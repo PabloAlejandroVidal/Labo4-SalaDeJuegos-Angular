@@ -1,0 +1,102 @@
+/* Estilos generales */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilo de la tarjeta */
+.game-card {
+  padding: 3em 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1em;
+  overflow: hidden;
+  background-color: #1c1f24;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  z-index: 1;
+}
+
+.game-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+
+}
+.game-card:hover:after{
+  content: '';
+  background: linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.6),
+    rgb(255, 255, 255),
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0.6),
+    rgb(255, 255, 255),
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0.6),
+    );
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+  background-size: 20em 20em;
+  z-index: 1;
+  opacity: .4;
+  width: calc(100% );
+  height: calc(100% );
+  animation: glowing-button-card 5s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: .2em;
+}
+
+@keyframes glowing-button-card {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100em 0;
+  }
+}
+
+/* Contenedor de la imagen */
+.game-card__image-container {
+  padding: 0;
+  z-index: 0;
+}
+
+.game-card__img {
+  transition: transform 0.2s ease;
+  width: 18em;
+  inline-size: none;
+  height: auto;
+  display: block; /* Alternativamente, usa vertical-align: middle/bottom/top */
+  vertical-align: bottom;
+}
+
+.game-card:hover .game-card__img {
+  transform: scale(1.33);
+}
+
+.game-card__content{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+.game-card__title {
+  text-align: center;
+  padding: .6em;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Estilos adicionales para el texto */
+.game-card__title {
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+

@@ -1,0 +1,7 @@
+<div class="display">
+  <div class="menu">
+    <button *ngFor="let item of menuItems" class="btn-design btn-design-game" (click)="onItemClick(item)">
+      {{ item.label }}
+    </button>
+  </div>
+</div>

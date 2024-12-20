@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="chat">
+
+    <div class="chat-container">
+      <div *ngIf="!messages.length" class="message">Aun nadie escribió en el chat. ¿Te gustaría escribir el primer mensaje?
+      </div>
+        <div *ngFor="let msg of messages; trackBy: trackMessages" class="message">
+          <div [ngClass]="{'message-sent': msg.from === currentUser, 'message-received': msg.from !== currentUser}">
+            <p class="message-sender">{{msg.from === currentUser ? 'Yo' : msg.from}}:</p>
+            <p class="message-text">{{msg.text}}</p>
+            <p class="message-timestamp">{{msg.sent}}</p>
+          </div>
+        </div>
+      </div>
+
+    <div class="chat-input">
+      <input
+      class="chat-send-input"
+      type="text"
+      placeholder="Escribe un mensaje..."
+      (keydown.enter)="sendMessage()"
+      [(ngModel)]="textToSend">
+    </div>
+
+  </div>
+</div>

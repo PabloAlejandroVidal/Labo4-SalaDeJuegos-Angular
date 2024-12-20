@@ -1,0 +1,119 @@
+<div class="form-container">
+  <h2 class="form-title">Encuesta</h2>
+  <form class="form" [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
+
+    <!-- Nombre y Apellido -->
+    <div class="form-row">
+      <label class="form-label row-cell" for="fullName">Nombre y Apellido</label>
+      <input class="form-input row-cell" id="fullName" type="text" formControlName="fullName" placeholder="Ingrese su nombre y apellido">
+    </div>
+    <div class="row-small" *ngIf="surveyForm.get('fullName')?.invalid && surveyForm.get('fullName')?.touched">
+      <small class="small-block" *ngIf="surveyForm.get('fullName')?.errors?.['required']">Este campo es obligatorio</small>
+      <small class="small-block" *ngIf="surveyForm.get('fullName')?.errors?.['minlength']">Debe tener al menos 2 caracteres</small>
+    </div>
+
+    <!-- Edad -->
+    <div class="form-row">
+      <label class="form-label row-cell" for="age">Edad</label>
+      <input class="form-input row-cell" id="age" type="number" formControlName="age" placeholder="Ingrese su edad">
+    </div>
+    <div class="row-small" *ngIf="surveyForm.get('age')?.invalid && surveyForm.get('age')?.touched">
+      <small class="small-block" *ngIf="surveyForm.get('age')?.errors?.['required']">Este campo es obligatorio</small>
+      <small class="small-block" *ngIf="surveyForm.get('age')?.errors?.['min']">Debe ser mayor de 18 años</small>
+      <small class="small-block" *ngIf="surveyForm.get('age')?.errors?.['max']">Debe ser menor de 99 años</small>
+    </div>
+
+    <!-- Número de teléfono -->
+    <div class="form-row">
+      <label class="form-label row-cell" for="phoneNumber">Número de Teléfono</label>
+      <input class="form-input row-cell" id="phoneNumber" type="text" formControlName="phoneNumber" placeholder="Ingrese su número de teléfono">
+    </div>
+    <div class="row-small" *ngIf="surveyForm.get('phoneNumber')?.invalid && surveyForm.get('phoneNumber')?.touched">
+      <small class="small-block" *ngIf="surveyForm.get('phoneNumber')?.errors?.['required']">Este campo es obligatorio</small>
+      <small class="small-block" *ngIf="surveyForm.get('phoneNumber')?.errors?.['numbersOnly']">Debe ser un número válido</small>
+      <small class="small-block" *ngIf="surveyForm.get('phoneNumber')?.errors?.['maxlength']">No debe ser de más de 10 dígitos</small>
+    </div>
+
+    <!-- Pregunta 1: Checkbox -->
+    <div class="form-row">
+      <label formGroupName="deportes" class="form-label">Pregunta 1: ¿Practicás alguno de estos deportes?
+        <label class="label-block">
+          <input type="checkbox" formControlName="tenis">
+            Tenis
+        </label>
+        <label class="label-block">
+          <input type="checkbox" formControlName="futbol">
+            Fútbol
+        </label>
+        <label class="label-block">
+          <input type="checkbox" formControlName="basquet">
+            Básquet
+        </label>
+        <label class="label-block">
+          <input type="checkbox" formControlName="voley">
+            Vóley
+        </label>
+        <label class="label-block">
+          <input type="checkbox" formControlName="otros">
+            Otros
+        </label>
+      </label>
+    </div>
+    <div class="row-small" *ngIf="surveyForm.get('deportes')?.invalid && surveyForm.get('deportes')?.touched">
+      <small class="small-block" *ngIf="surveyForm.get('deportes')?.errors?.['atLeastOneRequired']">Debe seleccionar al menos una opción</small>
+    </div>
+
+
+
+    <!-- Pregunta 2: Radiobutton -->
+    <div class="form-row">
+      <label class="form-label">Pregunta 2: Disfrutas más el verano o el invierno?
+        <label class="form-label label-block">
+          <input type="radio" formControlName="estacion" value="primavera"> Primavera
+        </label>
+        <label class="form-label label-block">
+          <input type="radio" formControlName="estacion" value="verano"> Verano
+        </label>
+        <label class="form-label label-block">
+          <input type="radio" formControlName="estacion" value="otoño"> Otoño
+        </label>
+        <label class="form-label label-block">
+          <input type="radio" formControlName="estacion" value="invierno"> Invierno
+        </label>
+      </label>
+    </div>
+      <div class="row-small" *ngIf="surveyForm.get('estacion')?.invalid && surveyForm.get('estacion')?.touched">
+        <small class="small-block">Este campo es obligatorio</small>
+      </div>
+
+    <!-- Pregunta 3: Textbox -->
+    <div class="form-row">
+      <label class="form-label" for="pasatiempos">Pregunta 3: ¿Cuál es tu pasatiempos favorito?</label>
+      <input class="form-input row-cell" id="pasatiempos" type="text" formControlName="pasatiempos" placeholder="Escribe tu pasatiempos">
+    </div>
+    <div class="row-small" *ngIf="surveyForm.get('pasatiempos')?.invalid && surveyForm.get('pasatiempos')?.touched">
+      <small class="small-block">Este campo es obligatorio</small>
+    </div>
+
+  <!-- Selector Paises -->
+
+  <div class="form-row">
+    <label class="form-label label-block" for="pais">Selecciona tu país
+      <app-selector-pais class="" [continentes]="admmitedContinents" formControlName="nacionalidad"></app-selector-pais>
+    </label>
+  </div>
+  <div class="row-small" *ngIf="surveyForm.get('nacionalidad')?.invalid">
+    <small class="small-block">Este campo es obligatorio</small>
+  </div>
+
+    <!-- Submit button -->
+     <div class="form-row">
+      <button class="btn-design btn-design-game form-submit" type="submit" [disabled]="surveyForm.invalid">Enviar Encuesta</button>
+     </div>
+
+    </form>
+    <br>
+    <div class="form-row">
+     <button class="btn-design btn-design-game form-input" (click)="goEncuestasRespuestas()" type="button">Ver Encuestas</button>
+    </div>
+</div>

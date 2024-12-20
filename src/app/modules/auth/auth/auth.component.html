@@ -1,0 +1,8 @@
+
+<div class="auth">
+  <router-outlet></router-outlet>
+  <div class="btns-content">
+    <button class="btn-design btn-design-form btn-jump" *ngIf="isLoginRouteActive()" (click)="goRegister()">Ir a la página registro</button>
+    <button class="btn-design btn-design-form btn-jump" *ngIf="isRegisterRouteActive()" (click)="goLogin()">Ir a la página login</button>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="game">
+  <ng-container *ngIf="(gameState !== gameStates.notStarted); else mainMenu">
+
+    <div class="info-container" (click)="pause(true)">
+
+      <div class="info-display">
+        <div>Mayor Puntaje En La Partida: {{recordActual}}</div>
+        <div>Puntaje Actual: {{puntaje}}</div>
+      </div>
+      <div class="info-display info-right">
+
+        <div>Mayor Puntaje Registrado: {{anteriorRecord}}</div>
+        <div>Cartas Restantes: {{mazo.length}}</div>
+      </div>
+    </div>
+
+    <div class="game-container">
+
+      <div class="card-container">
+        <img [src]="cartaActual?.imagen" alt="Carta Actual" class="card" />
+      </div>
+      <div class="controls">
+        <button (click)="adivinar(true)">Mayor</button>
+        <button (click)="adivinar(false)">Menor</button>
+      </div>
+      <div class="result">
+        <p>{{ resultado }}</p>
+      </div>
+      <div class="next-card" *ngIf="cartaSiguiente?.imagen">
+        <h3>Próxima Carta</h3>
+        <img [src]="cartaSiguiente?.imagen" alt="Carta Siguiente" class="card" />
+      </div>
+    </div>
+
+    <ng-container *ngIf="gameState === gameStates.gameOver">
+      <ng-container *ngTemplateOutlet="gameOverMenu"></ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="gameState === gameStates.paused">
+      <ng-container *ngTemplateOutlet="pauseMenu"></ng-container>
+    </ng-container>
+
+  </ng-container>
+
+
+  <ng-template #mainMenu>
+    <!-- main-menu.component.html -->
+  <app-game-menu
+  [menuItems]="mainMenuItems"
+  ></app-game-menu>
+  </ng-template>
+
+  <ng-template #pauseMenu>
+    <app-game-menu
+    [menuItems]="pauseMenuItems"
+    ></app-game-menu>
+  </ng-template>
+
+  <ng-template #gameOverMenu>
+    <app-game-menu
+    [menuItems]="gameOverMenuItems"
+  ></app-game-menu>
+  </ng-template>
+
+</div>

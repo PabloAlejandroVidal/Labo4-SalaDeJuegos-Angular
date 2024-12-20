@@ -1,0 +1,31 @@
+.no-disponible{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255, 227, 134);
+}
+.img{
+  filter: blur(3px);
+  min-height: 100%;
+  min-width: 100%;
+}
+.overlay{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.msg{
+  position: absolute;
+  padding: 2em;
+  margin: auto;
+  border-radius: .4em;
+  width: fit-content;
+  height: fit-content;
+  color: rgb(156, 0, 57);
+  background-color: rgba(255, 227, 134, 0.7);
+}

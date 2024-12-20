@@ -1,0 +1,11 @@
+.menu-design-container{
+  flex-shrink: 0;
+  height: 2.5em;
+  width: 2.5em;
+  border-radius: .5em;
+  overflow: hidden;
+  transition: all .4s;
+}
+.menu-design-container:hover{
+  transform: rotate(90deg);
+}

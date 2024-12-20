@@ -1,0 +1,12 @@
+<div class="keyboard">
+  <ng-container *ngFor="let line of keysLines">
+    <div class="keysLine">
+      <button *ngFor="let key of line"
+      [disabled]="isKeyDisabled(key)"
+      (click)="onKeyClick(key)"
+      class="key">
+      {{ key }}
+    </button>
+  </div>
+  </ng-container>
+</div>

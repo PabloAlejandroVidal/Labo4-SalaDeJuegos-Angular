@@ -1,0 +1,60 @@
+<div class="game">
+  <ng-container *ngIf="(gameState !== gameStates.notStarted); else mainMenu">
+
+    <div class="info-container" (click)="pause(true)">
+
+      <div class="info-display">
+        <div>Paises Restantes: {{paisesPorAdivinar.length}}</div>
+        <div>Puntaje Actual: {{paisesAdivinados}}</div>
+      </div>
+      <div class="info-display info-right">
+
+        <div>Mayor Puntaje: {{record}}</div>
+      </div>
+    </div>
+
+    <div class="game-container">
+      <div class="country-info">
+        <h2>¿A qué pais pertence esta bandera?</h2>
+        <img class="img-country" *ngIf="paisAAdivinar" [src]="paisAAdivinar.flag" alt="{{ 'Pais Incognita imagen' }} flag">
+      </div>
+
+      <div class="options-container">
+        <div *ngFor="let opcion of paisesParaOpciones" class="option" (click)="selectOption(opcion.name)">
+          <p>{{ opcion.name }}</p>
+        </div>
+      </div>
+    </div>
+
+
+    <ng-container *ngIf="gameState === gameStates.gameOver">
+      <ng-container *ngTemplateOutlet="gameOverMenu"></ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="gameState === gameStates.paused">
+      <ng-container *ngTemplateOutlet="pauseMenu"></ng-container>
+    </ng-container>
+
+  </ng-container>
+
+
+  <ng-template #mainMenu>
+    <!-- main-menu.component.html -->
+  <app-game-menu
+  [menuItems]="mainMenuItems"
+  ></app-game-menu>
+  </ng-template>
+
+  <ng-template #pauseMenu>
+    <app-game-menu
+    [menuItems]="pauseMenuItems"
+    ></app-game-menu>
+  </ng-template>
+
+  <ng-template #gameOverMenu>
+    <app-game-menu
+    [menuItems]="gameOverMenuItems"
+  ></app-game-menu>
+  </ng-template>
+
+</div>

@@ -1,0 +1,38 @@
+<div class="encuestas-respuestas-container">
+
+  <div *ngIf="loading" class="loading-spinner">
+    Cargando encuestas...
+  </div>
+
+  <div *ngIf="!loading && encuestas.length === 0" class="no-encuestas">
+    No se encontraron encuestas.
+  </div>
+
+  <div *ngIf="!loading && encuestas.length > 0" class="encuesta-list">
+    <div class="encuesta-title">
+      <h2 class="title">
+        Resultados de las encuestas
+      </h2>
+    </div>
+    <div *ngFor="let encuesta of encuestas" class="encuesta-card">
+
+      <h3>{{ encuesta.fullName }} ({{ encuesta.age }} años)</h3>
+      <p><strong>Teléfono:</strong> {{ encuesta.phoneNumber }}</p>
+
+      <ul>
+      <p><strong>Deportes:</strong>
+      </p>
+        <li *ngIf="encuesta.deportes.basquet">Básquet</li>
+        <li *ngIf="encuesta.deportes.futbol">Fútbol</li>
+        <li *ngIf="encuesta.deportes.tenis">Tenis</li>
+        <li *ngIf="encuesta.deportes.voley">Vóley</li>
+        <li *ngIf="encuesta.deportes.otros">Otros</li>
+      </ul>
+
+      <p><strong>Estación favorita:</strong> {{ encuesta.estacion }}</p>
+      <p><strong>Pasatiempos:</strong> {{ encuesta.pasatiempos }}</p>
+      <p><strong>Fecha de creación:</strong> {{ encuesta.createdAt | date:'medium' }}</p>
+    </div>
+  </div>
+
+</div>
