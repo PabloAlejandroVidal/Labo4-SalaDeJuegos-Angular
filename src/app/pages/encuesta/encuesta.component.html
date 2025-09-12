@@ -1,119 +1,171 @@
 <div class="form-container">
+
   <h2 class="form-title">Encuesta</h2>
+
   <form class="form" [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
 
     <!-- Nombre y Apellido -->
-    <div class="form-row">
-      <label class="form-label row-cell" for="fullName">Nombre y Apellido</label>
-      <input class="form-input row-cell" id="fullName" type="text" formControlName="fullName" placeholder="Ingrese su nombre y apellido">
-    </div>
-    <div class="row-small" *ngIf="surveyForm.get('fullName')?.invalid && surveyForm.get('fullName')?.touched">
-      <small class="small-block" *ngIf="surveyForm.get('fullName')?.errors?.['required']">Este campo es obligatorio</small>
-      <small class="small-block" *ngIf="surveyForm.get('fullName')?.errors?.['minlength']">Debe tener al menos 2 caracteres</small>
-    </div>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Nombre y Apellido</mat-label>
+      <input
+        matInput
+        id="fullName"
+        type="text"
+        formControlName="fullName"
+        placeholder="Ingrese su nombre y apellido"
+        autocomplete="name"
+      />
+      <mat-error *ngIf="surveyForm.get('fullName')?.hasError('required')">
+        Este campo es obligatorio
+      </mat-error>
+      <mat-error *ngIf="surveyForm.get('fullName')?.hasError('minlength')">
+        Debe tener al menos 2 caracteres
+      </mat-error>
+    </mat-form-field>
 
     <!-- Edad -->
-    <div class="form-row">
-      <label class="form-label row-cell" for="age">Edad</label>
-      <input class="form-input row-cell" id="age" type="number" formControlName="age" placeholder="Ingrese su edad">
-    </div>
-    <div class="row-small" *ngIf="surveyForm.get('age')?.invalid && surveyForm.get('age')?.touched">
-      <small class="small-block" *ngIf="surveyForm.get('age')?.errors?.['required']">Este campo es obligatorio</small>
-      <small class="small-block" *ngIf="surveyForm.get('age')?.errors?.['min']">Debe ser mayor de 18 años</small>
-      <small class="small-block" *ngIf="surveyForm.get('age')?.errors?.['max']">Debe ser menor de 99 años</small>
-    </div>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Edad</mat-label>
+      <input
+        matInput
+        id="age"
+        type="number"
+        formControlName="age"
+        placeholder="Ingrese su edad"
+        min="18"
+        max="99"
+      />
+      <mat-hint align="start">Entre 18 y 99</mat-hint>
+      <mat-error *ngIf="surveyForm.get('age')?.hasError('required')">
+        Este campo es obligatorio
+      </mat-error>
+      <mat-error *ngIf="surveyForm.get('age')?.hasError('min')">
+        Debe ser mayor de 18 años
+      </mat-error>
+      <mat-error *ngIf="surveyForm.get('age')?.hasError('max')">
+        Debe ser menor de 99 años
+      </mat-error>
+    </mat-form-field>
 
-    <!-- Número de teléfono -->
-    <div class="form-row">
-      <label class="form-label row-cell" for="phoneNumber">Número de Teléfono</label>
-      <input class="form-input row-cell" id="phoneNumber" type="text" formControlName="phoneNumber" placeholder="Ingrese su número de teléfono">
-    </div>
-    <div class="row-small" *ngIf="surveyForm.get('phoneNumber')?.invalid && surveyForm.get('phoneNumber')?.touched">
-      <small class="small-block" *ngIf="surveyForm.get('phoneNumber')?.errors?.['required']">Este campo es obligatorio</small>
-      <small class="small-block" *ngIf="surveyForm.get('phoneNumber')?.errors?.['numbersOnly']">Debe ser un número válido</small>
-      <small class="small-block" *ngIf="surveyForm.get('phoneNumber')?.errors?.['maxlength']">No debe ser de más de 10 dígitos</small>
-    </div>
-
-    <!-- Pregunta 1: Checkbox -->
-    <div class="form-row">
-      <label formGroupName="deportes" class="form-label">Pregunta 1: ¿Practicás alguno de estos deportes?
-        <label class="label-block">
-          <input type="checkbox" formControlName="tenis">
-            Tenis
-        </label>
-        <label class="label-block">
-          <input type="checkbox" formControlName="futbol">
-            Fútbol
-        </label>
-        <label class="label-block">
-          <input type="checkbox" formControlName="basquet">
-            Básquet
-        </label>
-        <label class="label-block">
-          <input type="checkbox" formControlName="voley">
-            Vóley
-        </label>
-        <label class="label-block">
-          <input type="checkbox" formControlName="otros">
-            Otros
-        </label>
-      </label>
-    </div>
-    <div class="row-small" *ngIf="surveyForm.get('deportes')?.invalid && surveyForm.get('deportes')?.touched">
-      <small class="small-block" *ngIf="surveyForm.get('deportes')?.errors?.['atLeastOneRequired']">Debe seleccionar al menos una opción</small>
-    </div>
-
+    <!-- Teléfono -->
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Número de Teléfono</mat-label>
+      <input
+        matInput
+        id="phoneNumber"
+        type="tel"
+        formControlName="phoneNumber"
+        placeholder="Ingrese su número (solo dígitos)"
+        maxlength="10"
+        inputmode="numeric"
+      />
+      <mat-hint align="end">
+        {{ surveyForm.get('phoneNumber')?.value?.length || 0 }}/10
+      </mat-hint>
+      <mat-error *ngIf="surveyForm.get('phoneNumber')?.hasError('required')">
+        Este campo es obligatorio
+      </mat-error>
+      <mat-error *ngIf="surveyForm.get('phoneNumber')?.hasError('maxlength')">
+        No debe ser de más de 10 dígitos
+      </mat-error>
+      <mat-error *ngIf="surveyForm.get('phoneNumber')?.hasError('pattern')">
+        Debe ser un número válido (solo dígitos)
+      </mat-error>
+    </mat-form-field>
 
 
-    <!-- Pregunta 2: Radiobutton -->
-    <div class="form-row">
-      <label class="form-label">Pregunta 2: Disfrutas más el verano o el invierno?
-        <label class="form-label label-block">
-          <input type="radio" formControlName="estacion" value="primavera"> Primavera
-        </label>
-        <label class="form-label label-block">
-          <input type="radio" formControlName="estacion" value="verano"> Verano
-        </label>
-        <label class="form-label label-block">
-          <input type="radio" formControlName="estacion" value="otoño"> Otoño
-        </label>
-        <label class="form-label label-block">
-          <input type="radio" formControlName="estacion" value="invierno"> Invierno
-        </label>
-      </label>
-    </div>
-      <div class="row-small" *ngIf="surveyForm.get('estacion')?.invalid && surveyForm.get('estacion')?.touched">
-        <small class="small-block">Este campo es obligatorio</small>
-      </div>
+<!-- Pregunta 1 -->
+<fieldset formGroupName="deportes"
+         class="mat-outline mat-outline mat-primary"
+         (focusin)="deportesFocus = true"
+         (focusout)="deportesFocus = false"
+         [class.focused]="deportesFocus"
+         [ngClass]="{'invalid': surveyForm.get('deportes')?.invalid && (surveyForm.get('deportes')?.touched || surveyForm.get('deportes')?.dirty)}">
+  <legend>Pregunta 1: ¿Practicás alguno de estos deportes?</legend>
 
-    <!-- Pregunta 3: Textbox -->
-    <div class="form-row">
-      <label class="form-label" for="pasatiempos">Pregunta 3: ¿Cuál es tu pasatiempos favorito?</label>
-      <input class="form-input row-cell" id="pasatiempos" type="text" formControlName="pasatiempos" placeholder="Escribe tu pasatiempos">
-    </div>
-    <div class="row-small" *ngIf="surveyForm.get('pasatiempos')?.invalid && surveyForm.get('pasatiempos')?.touched">
-      <small class="small-block">Este campo es obligatorio</small>
-    </div>
-
-  <!-- Selector Paises -->
-
-  <div class="form-row">
-    <label class="form-label label-block" for="pais">Selecciona tu país
-      <app-selector-pais class="" [continentes]="admmitedContinents" formControlName="nacionalidad"></app-selector-pais>
-    </label>
-  </div>
-  <div class="row-small" *ngIf="surveyForm.get('nacionalidad')?.invalid">
-    <small class="small-block">Este campo es obligatorio</small>
+  <div class="checkbox-grid">
+    <mat-checkbox formControlName="tenis">Tenis</mat-checkbox>
+    <mat-checkbox formControlName="futbol">Fútbol</mat-checkbox>
+    <mat-checkbox formControlName="basquet">Básquet</mat-checkbox>
+    <mat-checkbox formControlName="voley">Vóley</mat-checkbox>
+    <mat-checkbox formControlName="otros">Otros</mat-checkbox>
   </div>
 
-    <!-- Submit button -->
-     <div class="form-row">
-      <button class="btn-design btn-design-game form-submit" type="submit" [disabled]="surveyForm.invalid">Enviar Encuesta</button>
-     </div>
+  <mat-hint *ngIf="!surveyForm.get('deportes')?.touched">Podés elegir más de uno</mat-hint>
+  <mat-error *ngIf="surveyForm.get('deportes')?.hasError('atLeastOneRequired') && (surveyForm.dirty || surveyForm.touched)">
+    Debe seleccionar al menos una opción
+  </mat-error>
+</fieldset>
 
-    </form>
-    <br>
-    <div class="form-row">
-     <button class="btn-design btn-design-game form-input" (click)="goEncuestasRespuestas()" type="button">Ver Encuestas</button>
+<!-- Pregunta 2 -->
+<fieldset class="mat-outline"
+         [ngClass]="{'invalid': surveyForm.get('estacion')?.invalid && (surveyForm.get('estacion')?.touched || surveyForm.get('estacion')?.dirty)}">
+  <legend>Pregunta 2: ¿Disfrutás más…?</legend>
+
+  <mat-radio-group formControlName="estacion" class="radio-row">
+    <mat-radio-button value="primavera">Primavera</mat-radio-button>
+    <mat-radio-button value="verano">Verano</mat-radio-button>
+    <mat-radio-button value="otoño">Otoño</mat-radio-button>
+    <mat-radio-button value="invierno">Invierno</mat-radio-button>
+  </mat-radio-group>
+
+  <mat-error *ngIf="surveyForm.get('estacion')?.invalid && (surveyForm.get('estacion')?.touched || surveyForm.get('estacion')?.dirty)">
+    Este campo es obligatorio
+  </mat-error>
+</fieldset>
+
+
+    <!-- Pregunta 3: Texto -->
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Pregunta 3: ¿Cuál es tu pasatiempo favorito?</mat-label>
+      <input
+        matInput
+        id="pasatiempos"
+        type="text"
+        formControlName="pasatiempos"
+        placeholder="Escribí tu pasatiempo"
+      />
+      <mat-error *ngIf="surveyForm.get('pasatiempos')?.invalid && (surveyForm.get('pasatiempos')?.touched || surveyForm.get('pasatiempos')?.dirty)">
+        Este campo es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Selector de Países -->
+    <!-- Opción A: si tu <app-selector-pais> usa internamente <mat-select>, podés usarlo directo -->
+
+    <fieldset class="mat-outline group-block"
+        [ngClass]="{'invalid': surveyForm.get('nacionalidad')?.invalid && (surveyForm.dirty || surveyForm.touched)}">
+          <legend>Seleccioná tu país</legend>
+      <app-selector-pais
+        [continentes]="admmitedContinents"
+        formControlName="nacionalidad">
+      </app-selector-pais>
+      <mat-error *ngIf="surveyForm.get('nacionalidad')?.invalid && (surveyForm.dirty || surveyForm.touched)">
+        Este campo es obligatorio
+      </mat-error>
+    </fieldset>
+
+    <!-- Opción B (alternativa): usar <mat-select> aquí directamente
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>País</mat-label>
+      <mat-select formControlName="nacionalidad">
+        <mat-option *ngFor="let p of paises" [value]="p.codigo">{{ p.nombre }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="surveyForm.get('nacionalidad')?.invalid">
+        Este campo es obligatorio
+      </mat-error>
+    </mat-form-field>
+    -->
+
+    <!-- Botones -->
+    <div class="btn-row">
+      <button mat-raised-button color="primary" type="submit" [disabled]="surveyForm.invalid">
+        Enviar Encuesta
+      </button>
+      <button mat-stroked-button type="button" (click)="goEncuestasRespuestas()">
+        Ver Encuestas
+      </button>
     </div>
+
+  </form>
 </div>

@@ -90,3 +90,17 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+:root {
+  --app-primary: #{mat.get-color-from-palette($primary)};
+  --app-warn:    #{mat.get-color-from-palette($warn)};
+}
+
+.dark-mode {
+  --app-primary: #{mat.get-color-from-palette($primary, A200)};
+  --app-warn:    #{mat.get-color-from-palette($warn)};
+}
