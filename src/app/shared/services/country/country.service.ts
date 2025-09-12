@@ -14,7 +14,7 @@ export interface Country {
 })
 export class CountryService {
 
-  private apiUrl = 'https://restcountries.com/v3.1/all';
+  private apiUrl = 'https://restcountries.com/v3.1/all?fields=name,translations,cca3,flags,continents';
 
   constructor(private http: HttpClient) {}
 

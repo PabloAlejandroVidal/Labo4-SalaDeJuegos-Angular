@@ -35,10 +35,10 @@ export class AhorcadoGameComponent {
   disabledKeys: string[] = [];
 
 
-  letrasRestantes = 0;
-  errores = 0;
-  vidasRestantes = 6;
-  public static stickImgs = [
+  letrasRestantes: number = 0;
+  errores: number = 0;
+  vidasRestantes: number = 6;
+  public static stickImgs: Array<unknown> = [
   'assets/games/stick6.png',
   'assets/games/stick5.png',
   'assets/games/stick4.png',
