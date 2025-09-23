@@ -83,6 +83,9 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: $bg-color;
+  background-color: rgb(75, 151, 158);
+  background-color: #{mat.get-color-from-palette($primary, 900)};
+  color: #{mat.get-contrast-color-from-palette($primary, 900)};
 }
 
 *{
@@ -104,3 +107,31 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   --app-primary: #{mat.get-color-from-palette($primary, A200)};
   --app-warn:    #{mat.get-color-from-palette($warn)};
 }
+
+
+:root {
+  --app-form-bg: #{mat.get-color-from-palette($primary, 100)};
+  --app-form-fg: #{mat.get-contrast-color-from-palette($primary, 100)};
+}
+
+.dark-mode {
+  --app-form-bg: #{mat.get-color-from-palette($primary, 900)};
+  --app-form-fg: #{mat.get-contrast-color-from-palette($primary, 900)};
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important; /* fondo transparente */
+  box-shadow: 0 0 0 1000px transparent inset !important;
+  -webkit-text-fill-color: inherit !important; /* texto respeta tu color */
+  transition: background-color 9999s ease-in-out 0s !important; /* hack para evitar que vuelva */
+}
+
+
+
+.w-100 { width: 100%; }
+.btn-row { display: flex; gap: 12px; margin-top: 8px; }
+.mt-2 { margin-top: .5rem; }
