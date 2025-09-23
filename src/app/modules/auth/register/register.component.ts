@@ -15,6 +15,7 @@ export class RegisterComponent {
   authData = authDataInit;
   msgResult = '';
   form!: FormGroup;
+  hide = true;
 
   private router = inject(Router);
   private userService = inject(UserService)
