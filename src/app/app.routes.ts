@@ -5,10 +5,9 @@ import { noLoguedGuard } from './shared/guards/no-logued.guard';
 import { adminGuard } from './shared/guards/admin.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full'
+  {
+    path: '', redirectTo: 'home', pathMatch: 'full'
   },
-/*   { path: 'home', component: HomeComponent, canActivate: [authGuard]
-  }, */
   { path: 'auth',
     loadChildren: ()=> import('./modules/auth/auth.module').then(m => m.AuthModule), canActivate: [noLoguedGuard],
   },

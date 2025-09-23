@@ -1,20 +1,28 @@
+
+@use '@angular/material' as mat;
+
 .form-container {
   max-height: 90vh;
   margin-top: 1em;
 }
 .form{
+  width: 48em;
+  max-width: 98%;
   font-size: 1em;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   gap: .6em;
   justify-content: space-between;
-  max-width: 100vw;
   padding: .6em;
   align-items: center;
   background: linear-gradient(45deg, rgba(31, 117, 216, .9), rgba(51, 213, 97, .9));
   background: linear-gradient(45deg, rgba(157, 203, 255, 0.9), rgba(178, 255, 200, 0.9));
-  border-radius: .2em;
+  box-shadow: 0 0 3px 2px rgb(255, 255, 255), 0 0 0 1px rgb(255, 255, 255);
+  border-radius: .6em;
+
+  background: var(--app-form-bg);
+  color: var(--app-form-fg);
 }
 
 //representa cada control del form
@@ -46,6 +54,7 @@
 
 //para todos los inputs
 .form-input{
+  color:  var(--app-form-fg);
   max-width: 100%;
 }
 
@@ -118,3 +127,6 @@
 .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 4px 12px; }
 .radio-row { display: flex; gap: 16px; flex-wrap: wrap; }
 .btn-row { display: flex; gap: 12px; margin-top: 12px; }
+
+
+
