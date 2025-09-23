@@ -1,10 +1,19 @@
+@use '@angular/material' as mat;
+
 .form{
-  width: 24em;
+  width: 22em;
+  max-width: 98%;
   gap: 1em;
   padding-block: 2em;
-  border-radius: .6em;
+  border-radius: .4em;
   background: linear-gradient(45deg, rgb(117, 255, 234), rgb(255, 99, 237));
   box-shadow: 0 0 3px 2px rgb(255, 255, 255), 0 0 0 1px rgb(255, 255, 255);
+
+  background: var(--app-form-bg);
+  color: var(--app-form-fg);
+}
+input{
+  color:  var(--app-form-fg);
 }
 .form-title{
   font-size: 1.4em;
@@ -14,3 +23,4 @@
 .form-row{
   background-color: rgba(255, 255, 255, 0);
 }
+

@@ -17,6 +17,7 @@ export class LoginComponent {
   msgResult: string = '';
   message: any = true;
   form!: FormGroup;
+  hide = true;
 
   users = [{email: 'usuarioprueba1@gmail.com', password: '123456'},
     {email: 'usuarioprueba2@gmail.com', password: '123456'},

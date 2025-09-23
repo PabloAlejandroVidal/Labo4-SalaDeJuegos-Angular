@@ -1,4 +1,4 @@
-<div class="form-page">
+<!-- <div class="form-page">
   <div class="form-container">
     <h3 class="form-title">Iniciar Sesión</h3>
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form" >
@@ -34,4 +34,81 @@
         </div>
       }
     </form>
+</div>
+ -->
+
+
+ <div class="form-page">
+  <div class="form-container">
+    <h3 class="form-title">Iniciar Sesión</h3>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+
+      <!-- Email -->
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          id="email"
+          type="email"
+          formControlName="email"
+          autocomplete="email"
+          placeholder="tu@correo.com" />
+
+        <mat-error *ngIf="form.get('email')?.hasError('required')">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="form.get('email')?.hasError('minlength')">
+          Debe tener al menos 8 caracteres
+        </mat-error>
+        <mat-error *ngIf="form.get('email')?.hasError('email')">
+          Debe ser un correo electrónico válido
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Password -->
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Contraseña</mat-label>
+        <input
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          id="password"
+          formControlName="password"
+          autocomplete="current-password"
+          placeholder="Tu contraseña" />
+
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hide = !hide"
+          [attr.aria-label]="hide ? 'Mostrar contraseña' : 'Ocultar contraseña'"
+          [attr.aria-pressed]="!hide">
+          <mat-icon>{{ hide ? 'visibility' : 'visibility_off' }}</mat-icon>
+        </button>
+
+        <mat-error *ngIf="form.get('password')?.hasError('required')">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="form.get('password')?.hasError('minlength')">
+          Debe tener al menos 6 caracteres
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Botones -->
+      <div class="btn-row">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          Iniciar Sesión
+        </button>
+
+        <button mat-stroked-button type="button" (click)="loadUser(0)">
+          Cargar Usuario
+        </button>
+      </div>
+
+      @if (msgResult) {
+        <mat-hint class="mt-2">{{ msgResult }}</mat-hint>
+      }
+    </form>
+  </div>
 </div>
