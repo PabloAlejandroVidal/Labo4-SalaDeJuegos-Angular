@@ -1,90 +1,123 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
-import { gameNames, GameService, ScoreData } from 'app/modules/home/services/game/game.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+// import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+
+import { gameNames, GameService } from 'app/modules/home/services/game/game.service';
 import { map } from 'rxjs';
+
+type MayorMenorRow = { user: string; score: number; registered: Date };
+type AhorcadoRow   = { user: string; ganadas: number; total: number; ratio: number };
+type Conecta4Row   = { user: string; total: number; rojo: number; amarillo: number };
+type PregRow       = { user: string; score: number; registered: Date };
 
 @Component({
   selector: 'app-ranking',
   standalone: true,
-  imports: [CommonModule, DatePipe],
+  imports: [
+    CommonModule,
+    DatePipe,
+    MatCardModule,
+    MatTableModule,
+    MatSortModule,
+    // MatPaginatorModule,
+  ],
   templateUrl: './ranking.component.html',
-  styleUrl: './ranking.component.scss'
+  styleUrls: ['./ranking.component.scss'],
 })
 export class RankingComponent implements OnInit {
-  mayorMenorScores: any[] = [];
-  ahorcadoScores: any[] = [];
-  conectaCuatroScores: any[] = [];
-  preguntadosScores: any[] = [];
+  // DataSources Material
+  mayorMenorDS    = new MatTableDataSource<MayorMenorRow>([]);
+  ahorcadoDS      = new MatTableDataSource<AhorcadoRow>([]);
+  conectaCuatroDS = new MatTableDataSource<Conecta4Row>([]);
+  preguntadosDS   = new MatTableDataSource<PregRow>([]);
 
-  constructor(private gameService: GameService) { }
+  // Columnas visibles
+  mayorMenorCols    = ['user', 'score', 'registered'];
+  ahorcadoCols      = ['user', 'ratio'];
+  conectaCuatroCols = ['user', 'total', 'rojo', 'amarillo'];
+  preguntadosCols   = ['user', 'score', 'registered'];
+
+  // Sort independiente por tabla (refs desde el template)
+  @ViewChild('sortMM') sortMM!: MatSort;
+  @ViewChild('sortAH') sortAH!: MatSort;
+  @ViewChild('sortC4') sortC4!: MatSort;
+  @ViewChild('sortPR') sortPR!: MatSort;
+
+  // Si vas a usar paginadores, descomentar:
+  // @ViewChild('pagMM') pagMM!: MatPaginator;
+  // @ViewChild('pagAH') pagAH!: MatPaginator;
+  // @ViewChild('pagC4') pagC4!: MatPaginator;
+  // @ViewChild('pagPR') pagPR!: MatPaginator;
+
+  constructor(private gameService: GameService) {}
 
   ngOnInit(): void {
-    // Suscripción para obtener los puntajes del juego
+    // Mayor o Menor
     this.gameService.observeScores(gameNames.mayorMenor).pipe(
-      map((scores)=>{
-        const scoresmapped = scores.map((score)=>{
-          return score = {...score, registered: score.registered.toDate()}
-        });
-        const orderedScores = scoresmapped.sort((a, b) => b.score - a.score); // Orden descendente (más recientes primero)
-
-        return [ ...orderedScores]
+      map(scores => {
+        const m = scores.map(s => ({ ...s, registered: s.registered.toDate() as Date }));
+        return m.sort((a, b) => b.score - a.score);
       })
     ).subscribe({
-      next: (scores) => {
-        this.mayorMenorScores = scores;
+      next: scores => {
+        this.mayorMenorDS.data = scores;
+        // colocar sort después de que haya data y ViewChild resuelto
+        queueMicrotask(() => (this.mayorMenorDS.sort = this.sortMM));
       },
-      error: (err) => {
-        console.error('Error fetching scores', err);
-      }
+      error: err => console.error('Error fetching scores (mayorMenor)', err),
     });
 
-    this.gameService.getAhorcadoStatsForAllUsers().then((statsMap) => {
-      // Procesar los datos para obtener el array de puntajes
-      Object.keys(statsMap).forEach((email) => {
-        this.ahorcadoScores.push({
-          user: email,
-          total: statsMap[email].total,
-          ganadas: statsMap[email].ganadas,
-          // Calcular la relación ganadas/total
-          ratio: statsMap[email].ganadas / statsMap[email].total
-        });
-      });
-
-      // Ordenar por la relación ganadas/total en orden descendente (mejores ratios primero)
-      this.ahorcadoScores.sort((a, b) => b.ratio - a.ratio);
+    // Ahorcado
+    this.gameService.getAhorcadoStatsForAllUsers().then(statsMap => {
+      const rows: AhorcadoRow[] = Object.keys(statsMap).map(email => ({
+        user: email,
+        total: statsMap[email].total,
+        ganadas: statsMap[email].ganadas,
+        ratio: statsMap[email].total ? statsMap[email].ganadas / statsMap[email].total : 0,
+      }));
+      rows.sort((a, b) => b.ratio - a.ratio);
+      this.ahorcadoDS.data = rows;
+      queueMicrotask(() => (this.ahorcadoDS.sort = this.sortAH));
     });
 
-
-    this.gameService.getConectaCuatroStatsForAllUsers().then((statsMap) => {
-      Object.keys(statsMap).forEach((email) => {
-        this.conectaCuatroScores.push({
-          user: email,
-          total: statsMap[email].total,
-          rojo: statsMap[email].rojo,
-          amarillo: statsMap[email].amarillo,
-        })
-      });
-
-      this.conectaCuatroScores.sort((a, b) => b.total - a.total);
+    // Conecta 4
+    this.gameService.getConectaCuatroStatsForAllUsers().then(statsMap => {
+      const rows: Conecta4Row[] = Object.keys(statsMap).map(email => ({
+        user: email,
+        total: statsMap[email].total,
+        rojo: statsMap[email].rojo,
+        amarillo: statsMap[email].amarillo,
+      }));
+      rows.sort((a, b) => b.total - a.total);
+      this.conectaCuatroDS.data = rows;
+      queueMicrotask(() => (this.conectaCuatroDS.sort = this.sortC4));
     });
 
-
-
+    // Preguntados
     this.gameService.observeScores(gameNames.preguntados).pipe(
-      map((scores)=>{
-        const scoresmapped = scores.map((score)=>{
-          return score = {...score, registered: score.registered.toDate()}
-        });
-        const orderedScores = scoresmapped.sort((a, b) => b.score - a.score); // Orden descendente (más recientes primero)
-        return [ ...orderedScores]
+      map(scores => {
+        const m = scores.map(s => ({ ...s, registered: s.registered.toDate() as Date }));
+        return m.sort((a, b) => b.score - a.score);
       })
     ).subscribe({
-      next: (scores) => {
-        this.preguntadosScores = scores;
+      next: scores => {
+        this.preguntadosDS.data = scores;
+        queueMicrotask(() => (this.preguntadosDS.sort = this.sortPR));
       },
-      error: (err) => {
-        console.error('Error fetching scores', err);
-      }
+      error: err => console.error('Error fetching scores (preguntados)', err),
     });
   }
+
+  // Si agregás paginación, activar esto cuando exista el ViewChild:
+  // private attachPaginators() {
+  //   this.mayorMenorDS.paginator = this.pagMM;
+  //   this.ahorcadoDS.paginator   = this.pagAH;
+  //   this.conectaCuatroDS.paginator = this.pagC4;
+  //   this.preguntadosDS.paginator   = this.pagPR;
+  // }
+
+  trackByUser = (_: number, row: { user: string }) => row.user;
 }
