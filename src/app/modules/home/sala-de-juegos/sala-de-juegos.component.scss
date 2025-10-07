@@ -6,12 +6,13 @@
   display: flex;
   flex-direction: column;
   padding: .5em;
+  padding-bottom: 0;
   gap: .5em;
 }
 .games-container{
   position: relative;
   display: block;
-  height: 100%;
+  height: 100vh;
   background-color: $play-bg-color;
   border-radius: .5em;
   overflow: hidden;

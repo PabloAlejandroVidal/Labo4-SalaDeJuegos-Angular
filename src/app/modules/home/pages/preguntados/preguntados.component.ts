@@ -74,16 +74,16 @@ export class PreguntadosComponent {
   pauseMenuItems = [this.menuOptions.resume, this.menuOptions.goRanking, this.menuOptions.goHelp, this.menuOptions.exit];
   gameOverMenuItems = [this.menuOptions.restart, this.menuOptions.goRanking, this.menuOptions.goHelp, this.menuOptions.exit];
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.user = this.userService.currentUser;
     const subscription: Subscription = this.gameService.observeScore(this.user, gameNames.preguntados).subscribe((docScore)=>{
       this.record = docScore.score;
     })
     this.subscriptions.push(subscription);
-    this.obtenerPaisesDesdApi();
+    await this.obtenerPaisesDesdApi();
   }
 
-  obtenerPaisesDesdApi() {
+  async obtenerPaisesDesdApi() {
     const subscription: Subscription = this.countryService.getAllCountries()
     .pipe(take(1))
     .subscribe((countries)=>{
@@ -128,36 +128,36 @@ export class PreguntadosComponent {
     return pais;
   }
 
-  selectOption(paisNameSelected: string) {
+  async selectOption(paisNameSelected: string) {
     if (!this.paisAAdivinar) {
       return;
     }
     if (paisNameSelected === this.paisAAdivinar.name){
       this.paisesAdivinados++;
-      Swal.fire(
+      await Swal.fire(
         'Correcto!',
         `La bandera es de ${this.paisAAdivinar.name}`,
         'success'
       );
+      if (this.paisesPorAdivinar.length === 0){
+        Swal.fire(
+          'Fin del Juego!',
+          `Has acertado a ${this.paisesAdivinados} de 10 paises`,
+          'info'
+        );
+        if (this.user && this.paisesAdivinados > this.record){
+          const record = this.paisesAdivinados > this.record ? this.paisesAdivinados : this.record;
+          this.gameService.recordNewScore(this.user, gameNames.preguntados, record);
+        }
+        this.gameState = gameStates.gameOver;
+        return;
+      }
     }else{
       Swal.fire(
         'Incorrecto!',
         `La bandera es de ${this.paisAAdivinar.name}`,
         'warning'
       );
-    }
-    if (this.paisesPorAdivinar.length === 0){
-      Swal.fire(
-        'Fin del Juego!',
-        `Has acertado a ${this.paisesAdivinados} de 10 paises`,
-        'info'
-      );
-      if (this.user && this.paisesAdivinados > this.record){
-        const record = this.paisesAdivinados > this.record ? this.paisesAdivinados : this.record;
-        this.gameService.recordNewScore(this.user, gameNames.preguntados, record);
-      }
-      this.gameState = gameStates.gameOver;
-      return;
     }
     this.makeRiddle();
   }

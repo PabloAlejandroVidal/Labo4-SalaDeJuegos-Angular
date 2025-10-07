@@ -46,7 +46,7 @@ export class AhorcadoGameComponent {
   'assets/games/stick2.png',
   'assets/games/stick1.png',
   'assets/games/stick0.png'];
-  public static words: string[] = ['bienvenido', 'alumno', 'libreria', 'computadora'];
+  public static words: string[] = ['bienvenido', 'maestro', 'idioma', 'Argentina', 'alumno', 'biblioteca', 'computadora'];
   public static vida = 'assets/games/heart.png';
   public static repeatedImageUrl = 'assets/games/stick-word-space.png';
 
@@ -115,6 +115,7 @@ export class AhorcadoGameComponent {
     const indexRandom = Math.floor(Math.random() * AhorcadoGameComponent.words.length);
     const word = AhorcadoGameComponent.words[indexRandom];
     this.word = word.toUpperCase().split('');
+    console.log(word);
   }
 
   private setWordSlotsOnScreen() {
