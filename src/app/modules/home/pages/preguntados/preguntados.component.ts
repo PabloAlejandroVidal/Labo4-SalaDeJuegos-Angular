@@ -4,7 +4,7 @@ import { map, Subscription, take } from 'rxjs';
 import { GameState, gameStates } from '../../types/gameStateType';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { gameNames, GameService } from '../../services/game/game.service';
+import { gameNames, GameService } from '../../services/game.service';
 import { UserService } from 'app/shared/services/user/user.service';
 
 @Component({

@@ -1,0 +1,69 @@
+.countdown-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7); // Fondo semi-transparente
+  z-index: 9999; // Asegura que esté por encima de todo
+
+  .countdown-number,
+  .go-text {
+    color: white;
+    font-size: 15vw; // Tamaño grande relativo a la vista
+    font-weight: bold;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    animation: pulse 1s ease-out forwards;
+    opacity: 0;
+  }
+
+  // Animación de pulso para cada número
+  @keyframes pulse {
+    0% {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    } // Desaparece rápido
+  }
+  @keyframes pulse {
+    0% {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    // Se hace visible y grande rápido
+    50% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+    // Se encoge ligeramente antes de que el siguiente número aparezca
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+
+  .go-text {
+    font-size: 10vw;
+    animation: go-fade 0.5s ease-out forwards;
+  }
+
+  @keyframes go-fade {
+    0% {
+      transform: scale(1);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+  }
+}

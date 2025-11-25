@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { UserService } from 'app/shared/services/user/user.service';
-import { gameNames, GameService } from '../../services/game/game.service';
+import { gameNames, GameService } from '../../services/game.service';
 import { Router } from '@angular/router';
 import { DocumentData } from '@angular/fire/firestore';
 import Swal from 'sweetalert2';
@@ -166,7 +166,7 @@ export class MayorMenorComponent {
     const indiceActual = cartaActual.numero;
     const indiceSiguiente = cartaSiguiente.numero;
 
-    if ((mayor && indiceSiguiente >= indiceActual) || (!mayor && indiceSiguiente <= indiceActual)) {
+    if ((mayor && indiceSiguiente > indiceActual) || (!mayor && indiceSiguiente < indiceActual)) {
       this.resultado = '¡Correcto!';
       this.puntaje++;
 
@@ -174,7 +174,12 @@ export class MayorMenorComponent {
         this.recordActual = this.puntaje;
       }
 
-    } else {
+    }
+    else if((mayor && indiceSiguiente == indiceActual) || (!mayor && indiceSiguiente == indiceActual))
+      {
+        this.resultado = '';
+      }
+    else {
       this.resultado = '¡Incorrecto!';
       this.puntaje = 0;
 

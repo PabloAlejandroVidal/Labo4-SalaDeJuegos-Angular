@@ -1,26 +1,27 @@
-@use '@angular/material' as mat;
+.form-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+}
 
-.form{
-  width: 22em;
-  max-width: 98%;
+.form-container {
+  width: 100%;
+
+}
+
+/* IMPORTANTE: que el form no tenga un ancho fijo “raro” */
+.form {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
   gap: 1em;
-  padding-block: 2em;
-  border-radius: .4em;
-  background: linear-gradient(45deg, rgb(117, 255, 234), rgb(255, 99, 237));
-  box-shadow: 0 0 3px 2px rgb(255, 255, 255), 0 0 0 1px rgb(255, 255, 255);
 
-  background: var(--app-form-bg);
-  color: var(--app-form-fg);
+  /* Quitamos sombras/fondos fuertes si molestan dentro del panel */
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  padding-block: 0;
 }
-input{
-  color:  var(--app-form-fg);
-}
-.form-title{
-  font-size: 1.4em;
-  font-weight: 500;
-  padding: 1em;
-}
-.form-row{
-  background-color: rgba(255, 255, 255, 0);
-}
-

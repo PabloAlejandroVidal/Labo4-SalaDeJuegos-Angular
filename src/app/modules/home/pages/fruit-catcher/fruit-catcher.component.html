@@ -1,0 +1,90 @@
+<div
+  class="game"
+  [class.is-loaded]="bgLoaded"
+  [style.--bg-url]="'url(/assets/games/tropical-game-menu-background5.jpg)'"
+>
+  <div class="menu" *ngIf="game.gameState === 'INIT'">
+    <div class="logo"></div>
+
+    <div class="rules-box">
+      <h2 class="rules">
+        Atrapa al menos {{ winThreshold }} frutas antes de perder todas tus vidas
+        para ganar. 🍓
+      </h2>
+    </div>
+
+    <app-game-button
+      (click)="startCountdown()"
+      [color]="'#00aa00'"
+      [label]="'Comenzar'"
+    ></app-game-button>
+
+    <app-game-button
+      (click)="startCountdown()"
+      [color]="'#00aa00'"
+      [label]="'Ajustes'"
+    ></app-game-button>
+
+    <br />
+
+    <app-game-button
+      (click)="exit()"
+      [color]="'#aa0000'"
+      [label]="'Salir'"
+    ></app-game-button>
+  </div>
+
+  <app-game-result-overlay
+    [open]="game.gameState === 'FINISHED'"
+    [score]="game.fruitsCaught"
+    [loading]="result.loading"
+    [message]="resultMessage"
+    (retry)="onRetry()"
+    (close)="onCloseResult()"
+  ></app-game-result-overlay>
+
+  <app-game-countdown
+    *ngIf="game.gameState === 'COUNTDOWN'"
+    [initialCount]="3"
+    (countdownFinished)="start()"
+  ></app-game-countdown>
+
+  <!-- HUD -->
+  <div class="hud" *ngIf="['RUNNING', 'PAUSED', 'FINISHING'].includes(game.gameState)">
+    <div class="stat">❤️ {{ game.lives }}</div>
+    <div class="stat">🍓 {{ game.fruitsCaught }}</div>
+  </div>
+
+  <div
+    class="board"
+    #boardEl
+    (pointerdown)="onPointerDown($event)"
+    (pointermove)="onPointerMove($event)"
+    (pointerup)="onPointerUp($event)"
+  >
+    <div
+      class="fruit"
+      *ngFor="let f of game.fruits; trackBy: trackFruit; let i = index"
+      [attr.data-id]="f.id"
+      [class.removing]="f.removing"
+      [class.slicing]="f.slicing"
+      [style.left.%]="f.nx * 100"
+      [style.top.%]="f.ny * 100"
+    >
+      <img [src]="f.sprite" alt="" />
+    </div>
+
+    <svg class="sliceTrail" pointer-events="none">
+      <polyline
+        *ngIf="slices.length > 1"
+        [attr.points]="getSlicePoints()"
+        stroke="rgba(0,255,255,0.9)"
+        stroke-width="6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        fill="none"
+        pointer-events="none"
+      />
+    </svg>
+  </div>
+</div>

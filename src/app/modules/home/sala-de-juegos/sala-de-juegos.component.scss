@@ -12,7 +12,7 @@
 .games-container{
   position: relative;
   display: block;
-  height: 100vh;
+  flex: 1;
   background-color: $play-bg-color;
   border-radius: .5em;
   overflow: hidden;

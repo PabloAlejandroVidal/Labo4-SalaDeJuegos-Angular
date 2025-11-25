@@ -1,0 +1,9 @@
+<div class="countdown-container">
+  <ng-container *ngIf="currentCount > 0">
+    <div class="countdown-number" [@numberChange]="currentCount">{{ currentCount }}</div>
+  </ng-container>
+
+  <ng-container *ngIf="currentCount === 0">
+    <div class="go-text">¡A JUGAR!</div>
+  </ng-container>
+</div>

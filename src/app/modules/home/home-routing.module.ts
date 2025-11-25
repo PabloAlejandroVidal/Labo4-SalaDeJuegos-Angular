@@ -5,9 +5,8 @@ import { GamesListComponent } from './pages/games-list/games-list.component';
 import { AhorcadoGameComponent } from './pages/ahorcado-game/ahorcado-game.component';
 import { GAMES_ROUTES } from './constants/routes.constants';
 import { MayorMenorComponent } from './pages/mayor-menor/mayor-menor.component';
-import { JuegoNoDisponibleComponent } from './pages/juego-no-disponible/juego-no-disponible.component';
-import { ConectaCuatroComponent } from './pages/conecta-cuatro/conecta-cuatro.component';
 import { PreguntadosComponent } from './pages/preguntados/preguntados.component';
+import { FruitCatcherComponent } from './pages/fruit-catcher/fruit-catcher.component';
 
 
 const routes: Routes = [
@@ -17,8 +16,8 @@ const routes: Routes = [
       { path: '', component: GamesListComponent },
       { path: GAMES_ROUTES.AHORCADO, component: AhorcadoGameComponent },
       { path: GAMES_ROUTES.MAYOR_MENOR, component: MayorMenorComponent },
-      { path: GAMES_ROUTES.CONECTA_CUATRO, component: ConectaCuatroComponent },
       { path: GAMES_ROUTES.PREGUNTADOS, component: PreguntadosComponent },
+      // { path: GAMES_ROUTES.FRUIT_CATCHER, component: FruitCatcherComponent },
       { path: '**', component: GamesListComponent },
       ]
   }

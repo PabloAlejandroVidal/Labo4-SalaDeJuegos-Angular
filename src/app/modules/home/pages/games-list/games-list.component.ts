@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { gameNames, GameService } from '../../services/game/game.service';
+import { gameNames, GameService } from '../../services/game.service';
 import { Router } from '@angular/router';
 
 
@@ -16,7 +16,8 @@ export class GamesListComponent {
     AHORCADO: 'ahorcado',
     MAYOR_MENOR: 'mayor-menor',
     CONECTA_CUATRO: 'conecta-cuatro',
-    PREGUNTADOS: 'preguntados'
+    PREGUNTADOS: 'preguntados',
+    FRUIT_CATCHER: 'fruit-catcher',
   };
 
   static GAMES = {
@@ -35,6 +36,10 @@ export class GamesListComponent {
     preguntados: {
       name: gameNames.preguntados,
       urlImg: '/assets/games/juego-preguntados.png',
+    },
+    fruitCatcher: {
+      name: gameNames.fruitCatcher,
+      urlImg: '/assets/games/juego-cazador-de-frutas.png',
     }
   }
 

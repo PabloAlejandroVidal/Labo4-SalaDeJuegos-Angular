@@ -1,0 +1,34 @@
+<!-- Contenedor full-screen -->
+<div class="overlay" [class.open]="open" (click)="onClose()" [attr.aria-hidden]="!open">
+  <!-- Evita cerrar al clicar dentro de la tarjeta -->
+  <div class="card" (click)="$event.stopPropagation()" role="dialog" aria-modal="true">
+    <div class="card-header">
+      <h2>¡Fin del juego!</h2>
+      <button class="icon-btn" aria-label="Cerrar" (click)="onClose()">✕</button>
+    </div>
+
+    <div class="score">
+      <span class="label">Tu puntaje</span>
+      <div class="value">{{ score }}</div>
+    </div>
+
+    <div class="result" [ngClass]="{ win: wonCoupon, lose: !wonCoupon }">
+      <div class="loading" *ngIf="loading; else cupon">
+        <div class="spinner"></div>
+        Obteniendo resultados…
+      </div>
+
+      <ng-template #cupon>
+        <div class="badge">{{message}}</div>
+      </ng-template>
+    </div>
+
+    <div class="actions">
+      <button class="btn primary" (click)="onRetry()">Jugar de nuevo</button>
+      <button class="btn ghost" (click)="onClose()">Salir</button>
+    </div>
+  </div>
+
+  <!-- Confetti simple cuando hay cupón -->
+  <div class="confetti" *ngIf="open && wonCoupon" aria-hidden="true"></div>
+</div>

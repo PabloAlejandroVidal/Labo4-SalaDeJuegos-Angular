@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { ChatService } from '../../shared/services/chat/chat.service';
 import { FirestoreService } from '../../shared/services/firestore/firestore.service';
 import { AuthService } from '../../shared/services/auth/auth.service';
@@ -11,6 +11,16 @@ import { UserData } from '../../shared/interfaces/user-data';
   styleUrl: './chat.component.scss',
 })
 export class ChatComponent {
+  @ViewChild('chatContainer') private chatContainer!: ElementRef;
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+  private scrollToBottom(): void {
+    try {
+      this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
+    } catch (err) { }
+  }
 
   private subscriptions: Subscription[] = [];
   private usersOnline: UserData[] = [];
