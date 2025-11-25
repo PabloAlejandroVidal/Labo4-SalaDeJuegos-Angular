@@ -3,5 +3,6 @@ export const GAMES_ROUTES = {
   AHORCADO: 'ahorcado',
   MAYOR_MENOR: 'mayor-menor',
   CONECTA_CUATRO: 'conecta-cuatro',
-  PREGUNTADOS: 'preguntados'
+  PREGUNTADOS: 'preguntados',
+  FRUIT_CATCHER: 'fruit-catcher',
 };

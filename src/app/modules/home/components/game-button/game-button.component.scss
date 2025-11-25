@@ -1,0 +1,140 @@
+.game-btn {
+  /* Color base inyectable */
+  // --btn-color:#4f8cff;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.4rem;
+  min-width: 180px;
+
+  font:
+    900 1.3rem 'Inter',
+    system-ui,
+    sans-serif;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 4),
+    0px 0px 1px rgba(0, 0, 0);
+
+  /* Fondo con volumen: 2 overlays + color sólido */
+  background:          /* sombra */
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.2),
+      rgb(255, 255, 255, 0.1),
+      rgb(255, 255, 255, 0.3),
+      rgb(255, 255, 255, 0.3),
+      rgb(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.2)
+    ),
+    /* brillo */ linear-gradient(to bottom, rgba(0, 0, 0, 0) 55%, rgba(255, 7, 7, 0.3)),
+    /* sombra */ var(--btn-color); /* base sólida */
+
+  box-shadow:
+    inset 4px 4px 4px rgba(0, 0, 0, 0.1),
+    inset -8px -8px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 14px;
+
+  /* Pilar inferior + sombra ambiental */
+
+  cursor: pointer;
+  user-select: none;
+  transition:
+    transform 0.08s ease,
+    box-shadow 0.08s ease,
+    filter 0.15s ease;
+
+  /* Brillo superior difuminado */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 4px 4px auto 4px;
+    height: 100%;
+    border-radius: 12px 12px 0 0;
+
+    /* Gradiente más suave y amplio */
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.04),
+      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0),
+      rgba(0, 0, 0, 0)
+    );
+
+    /* Difumina el borde */
+    filter: blur(2px);
+    opacity: 0.8;
+
+    pointer-events: none;
+  }
+
+  &:hover {
+    filter: brightness(1.2);
+  }
+
+  &:active {
+    transform: translateY(4px);
+
+    text-shadow:
+      0 -1px 0 rgba(0, 0, 0, 4),
+      0px 0px 1px rgba(0, 0, 0);
+  }
+
+  &:focus-visible {
+    outline: 0;
+    box-shadow:
+      0 6px 0 rgba(0, 0, 0, 0.35),
+      0 12px 22px rgba(0, 0, 0, 0.28),
+      0 0 0 4px rgba(255, 255, 255, 0.9),
+      0 0 0 6px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.game-button:after {
+  content: '';
+  background: linear-gradient(
+    45deg,
+    rgb(255, 255, 255, 0.4),
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2),
+    rgb(255, 255, 255, 0.4),
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2),
+    rgb(255, 255, 255, 0.4)
+  );
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+  background-size: 20em 20em;
+  z-index: 1;
+  opacity: 0.4;
+  width: 100%;
+  height: 100%;
+  animation: glowing-button-button 10s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 14px;
+}
+
+@keyframes glowing-button-button {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100em 0;
+  }
+}

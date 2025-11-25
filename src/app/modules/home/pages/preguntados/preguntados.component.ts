@@ -4,7 +4,7 @@ import { map, Subscription, take } from 'rxjs';
 import { GameState, gameStates } from '../../types/gameStateType';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { gameNames, GameService } from '../../services/game/game.service';
+import { gameNames, GameService } from '../../services/game.service';
 import { UserService } from 'app/shared/services/user/user.service';
 
 @Component({
@@ -75,6 +75,7 @@ export class PreguntadosComponent {
   gameOverMenuItems = [this.menuOptions.restart, this.menuOptions.goRanking, this.menuOptions.goHelp, this.menuOptions.exit];
 
   async ngOnInit() {
+    console.log("preguntados")
     this.user = this.userService.currentUser;
     const subscription: Subscription = this.gameService.observeScore(this.user, gameNames.preguntados).subscribe((docScore)=>{
       this.record = docScore.score;

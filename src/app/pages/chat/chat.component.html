@@ -1,26 +1,80 @@
-<div class="container">
+<div class="chat-root">
   <div class="chat">
-
-    <div class="chat-container">
-      <div *ngIf="!messages.length" class="message">Aun nadie escribió en el chat. ¿Te gustaría escribir el primer mensaje?
+    <!-- HEADER -->
+    <header class="chat-header">
+      <div class="chat-title-group">
+        <span class="chat-title">Chat global</span>
+        <span class="chat-subtitle">Habla con otros jugadores en línea</span>
       </div>
-        <div *ngFor="let msg of messages; trackBy: trackMessages" class="message">
-          <div [ngClass]="{'message-sent': msg.from === currentUser, 'message-received': msg.from !== currentUser}">
-            <p class="message-sender">{{msg.from === currentUser ? 'Yo' : msg.from}}:</p>
-            <p class="message-text">{{msg.text}}</p>
-            <p class="message-timestamp">{{msg.sent}}</p>
-          </div>
+
+      <div class="chat-status" [class.chat-status--online]="!isLoading">
+        <span class="status-dot"></span>
+        <span class="status-text">
+          {{ isLoading ? 'Conectando…' : 'En línea' }}
+        </span>
+      </div>
+    </header>
+
+    <!-- MENSAJES -->
+    <div class="chat-messages" #chatContainer>
+
+      <!-- Estado cargando -->
+      <div *ngIf="isLoading" class="chat-loading">
+        <div class="spinner"></div>
+        <span>Conectando al chat...</span>
+      </div>
+
+      <!-- Sin mensajes aún -->
+      <div
+        *ngIf="!isLoading && !messages.length"
+        class="message message-empty"
+      >
+        Aún nadie escribió en el chat.<br />
+        ¿Te gustaría escribir el primer mensaje?
+      </div>
+
+      <!-- Mensajes -->
+      <div
+        *ngFor="let msg of messages; trackBy: trackMessages"
+        class="message"
+      >
+        <div
+          [ngClass]="{
+            'message-sent': msg.from === currentUser,
+            'message-received': msg.from !== currentUser
+          }"
+        >
+          <p class="message-sender">
+            {{ msg.from === currentUser ? 'Yo' : msg.from }}
+          </p>
+          <p class="message-text">
+            {{ msg.text }}
+          </p>
+          <p class="message-timestamp">
+            {{ msg.sent }}
+          </p>
         </div>
       </div>
-
-    <div class="chat-input">
-      <input
-      class="chat-send-input"
-      type="text"
-      placeholder="Escribe un mensaje..."
-      (keydown.enter)="sendMessage()"
-      [(ngModel)]="textToSend">
     </div>
 
+    <!-- INPUT -->
+    <form class="chat-input" (ngSubmit)="sendMessage()" novalidate>
+      <input
+        class="chat-send-input"
+        type="text"
+        placeholder="Escribí un mensaje..."
+        [(ngModel)]="textToSend"
+        name="chatInput"
+        autocomplete="off"
+      />
+
+      <button
+        type="submit"
+        class="chat-send-button"
+        [disabled]="!textToSend.trim()"
+      >
+        ➤
+      </button>
+    </form>
   </div>
 </div>

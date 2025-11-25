@@ -1,6 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
 import Swal from 'sweetalert2';
-import { gameNames, GameService } from '../../services/game/game.service';
+import { gameNames, GameService } from '../../services/game.service';
 import { Route, Router } from '@angular/router';
 import { UserService } from 'app/shared/services/user/user.service';
 
@@ -49,6 +49,13 @@ export class AhorcadoGameComponent {
   public static words: string[] = ['bienvenido', 'maestro', 'idioma', 'Argentina', 'alumno', 'biblioteca', 'computadora'];
   public static vida = 'assets/games/heart.png';
   public static repeatedImageUrl = 'assets/games/stick-word-space.png';
+
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    console.log("ahorcado")
+  }
 
   public readonly menuOptions = {
     init: {

@@ -1,1 +1,20 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
 
+app-nav-bar {
+  flex: 0 0 auto;
+}
+
+/* El área de rutas ocupa lo que queda, sin forzar otro 100vh */
+.layout-router-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}

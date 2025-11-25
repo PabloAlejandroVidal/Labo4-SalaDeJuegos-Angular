@@ -1,5 +1,5 @@
-// _index.scss (puede ser cualquier nombre, pero generalmente se usa _index.scss)
-@forward '_variables';
-@forward '_mixins';
-@forward '_classes';
-@forward '_forms';
+// src/styles/index.scss
+@forward 'variables';
+@forward 'mixins';
+@forward 'classes';
+@forward 'forms';

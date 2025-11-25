@@ -1,39 +1,231 @@
-@use 'index' as *; // Ajusta la ruta según tu estructura de archivos
+@use 'index' as *;
 
-.home{
+:host {
+  display: block;
+  height: 100%; // importante: llena el espacio de layout-router-content
+}
+
+/* ROOT */
+.games-root {
+  position: relative;
+  height: 100%;
+  padding: 1.8rem 1.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* =========================
+   SHELL PRINCIPAL
+   ========================= */
+
+.games-shell {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1100px;
+  height: 100%;
+  border-radius: 1.5rem;
+  padding: 1.6rem 2rem;
+  display: grid;
+
+  /* Columna izquierda se ajusta al contenido hasta un máximo
+     Columna derecha ocupa el resto */
+  grid-template-columns: fit-content(260px) minmax(0, 1fr);
+
+  /* 👇 1 sola fila que ocupa todo el alto disponible */
+  grid-template-rows: 1fr;
+
+  gap: 1.5rem;
+
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 30, 40, 0.9)
+  );
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  color: #f5f5f5;
+}
+
+/* =========================
+   PANEL IZQUIERDO (USER)
+   ========================= */
+
+.user-panel {
+  min-width: 0;
+  width: max-content;   // se ajusta al contenido
+  max-width: 260px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  /* 👇 clave: NO se estira en alto, solo ocupa lo que mida su contenido */
+  align-self: flex-start;
+  height: auto;
+
+  /* Si el contenido se pasa en alto, scrollea solo este panel */
+  overflow-y: auto;
+}
+
+/* =========================
+   PANEL DERECHO (JUEGO)
+   ========================= */
+
+.games-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  background-color: $play-bg-color;
+  overflow: hidden;
+
+  /* 👇 ocupa todo el alto de la fila */
+  align-self: stretch;
+  min-height: 0;
+}
+
+/* Zona donde vive el router-outlet */
+.games-main {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Asegura que los juegos llenen el espacio */
+.games-main > app-mayor-menor,
+.games-main > app-ahorcado-game,
+.games-main > app-fruit-catcher,
+.games-main > app-preguntados {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.games-main .game {
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: .5em;
-  padding-bottom: 0;
-  gap: .5em;
-}
-.games-container{
-  position: relative;
-  display: block;
-  height: 100vh;
-  background-color: $play-bg-color;
-  border-radius: .5em;
-  overflow: hidden;
 }
 
-.games-container:last-child:has(.game){
-  height: 97.5vh;
-}
-
-app-mayor-menor{
-  flex-grow: 1;
-  overflow: hidden;
-}
-app-conecta-cuatro{
-  flex-grow: 1;
-  overflow: hidden;
+/* Chat flotante dentro del panel de juegos */
+.chat-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.88);
+  box-shadow: 0 0.6rem 2rem rgba(0, 0, 0, 0.7);
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  z-index: 10;
 }
 
-.hidden{
-  display: none;
+/* COLUMNA IZQUIERDA COMPLETA (user panel + chat) */
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  /* No permitir crecimiento infinito */
+  min-width: 380px;
+  max-width: 260px;
+  height: 100%;
+
+  /* Esto permite que el juego conserve su espacio */
+  overflow: hidden;
+}
+
+/* User Panel tal cual estaba */
+.user-panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Chat ubicado en la columna izquierda */
+.left-chat-container {
+  width: 100%;
+  flex: 0 0 auto;
+  max-height: 340px;        /* 👈 ajustar si querés más o menos alto */
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.88);
+  box-shadow: 0 0.6rem 2rem rgba(0, 0, 0, 0.6);
+
+  /* Si querés que se recorte si hay mucho contenido */
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+/* ------------------------------------
+   TOP BAR DEL SIDE PANEL
+------------------------------------- */
+.side-top-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+
+  padding: 0.5rem;
+  border-radius: 0.6rem;
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(0,255,255,0.18);
+}
+
+/* Botones del top bar */
+.top-btn {
+  flex: 1;
+  padding: 0.35rem 0.6rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: #dfffff;
+  background: rgba(0,255,255,0.15);
+  border: 1px solid rgba(0,255,255,0.25);
+  transition: background 0.25s, transform 0.15s ease;
+
+  &:hover {
+    background: rgba(0,255,255,0.28);
+    transform: translateY(-1px);
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Botón de volver más pequeño */
+.top-btn.back {
+  flex: 0 0 40px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+/* Estilos particulares */
+.top-btn.logout {
+  background: rgba(255,0,70,0.22);
+  border-color: rgba(255,0,70,0.35);
+
+  &:hover {
+    background: rgba(255,0,70,0.35);
+  }
 }

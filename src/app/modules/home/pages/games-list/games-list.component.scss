@@ -1,9 +1,47 @@
-@use 'index' as *; // Ajusta la ruta según tu estructura de archivos
+@use 'index' as *;
 
-.lista-juegos{
-  display: flex;
-  justify-content: space-around;
-  padding: 1em;
-  gap: 1em;
-  flex-wrap: wrap;
+:host {
+  display: block;
+  height: 100%;       // Para que el router-outlet pueda expandirse
+  width: 100%;
+}
+
+/* Contenedor scrollable */
+.games-list-scroll {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  padding-right: 0.6rem;   // evita que el scroll tape contenido
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.4) transparent;
+
+  /* Mejor estética en navegadores Webkit */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.35);
+    border-radius: 6px;
+  }
+}
+
+/* GRID de juegos */
+.lista-juegos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.2rem;
+  padding: 1rem;
+  align-items: stretch;
+}
+
+/* Animación suave al aparecer */
+.lista-juegos app-game-card {
+  transition: transform .15s ease, box-shadow .15s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 0 12px rgba(0, 229, 255, 0.4),
+      0 10px 25px rgba(0, 0, 0, 0.6);
+  }
 }

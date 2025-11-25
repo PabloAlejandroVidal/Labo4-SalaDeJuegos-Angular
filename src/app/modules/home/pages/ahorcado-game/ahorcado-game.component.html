@@ -2,29 +2,47 @@
   <ng-container *ngIf="(gameState !== gameStates.notStarted); else mainMenu">
 
     <div class="info-container" (click)="pause(true)">
-      <!-- <div class="info-display">
-      </div> -->
       <div class="info-display">
         <div>Vidas Restantes: {{vidasRestantes}}</div>
         <div>Letras Sin Completar: {{letrasRestantes}}</div>
       </div>
+
       <div class="info-vidas">
-        <img *ngFor="let n of [].constructor(vidasRestantes); let i = index" [src]="ahorcadoGameComponent.vida" class="vida-img">
+        <img *ngFor="let n of [].constructor(vidasRestantes); let i = index"
+             [src]="ahorcadoGameComponent.vida"
+             class="vida-img">
       </div>
     </div>
 
-    <div class="main-image-container">
-      <img src="{{ahorcadoGameComponent.stickImgs[vidasRestantes]}}" alt="stick-man" class="main-image">
-      <div *ngFor="let letter of (wordOnScreen); let idx = index"
-      [ngStyle]="{'bottom': 12 + (idx * 0) + '%', 'left': (6 + (idx * 6)) + '%'}"
-      class="repeated-image-cont">
-        <span class="repeated-letter">{{wordOnScreen[idx]}}</span>
+  <div class="main-image-container">
+
+    <div class="main-image-wrapper">
+      <img
+        [src]="ahorcadoGameComponent.stickImgs[vidasRestantes]"
+        alt="stick-man"
+        class="main-image"
+      >
+
+      <div *ngFor="let letter of wordOnScreen; let idx = index"
+          [style.bottom]="(12) + '%'"
+          [style.left]="(6 + (idx * 6)) + '%'"
+          class="repeated-image-cont">
+
+        <span class="repeated-letter">{{letter}}</span>
         <img [src]="ahorcadoGameComponent.repeatedImageUrl" alt="" class="repeated-image">
       </div>
     </div>
 
+  </div>
+
+
     <ng-container *ngIf="gameState === gameStates.playing">
-      <app-on-screen-keyboard [disabledKeys]="disabledKeys" (keyPress)="onKeyPress($event)"></app-on-screen-keyboard>
+      <div class="keyboard-wrapper">
+        <app-on-screen-keyboard
+          [disabledKeys]="disabledKeys"
+          (keyPress)="onKeyPress($event)">
+        </app-on-screen-keyboard>
+      </div>
     </ng-container>
 
     <ng-container *ngIf="gameState === gameStates.gameOver">
@@ -38,21 +56,14 @@
   </ng-container>
 
   <ng-template #mainMenu>
-  <app-game-menu
-  [menuItems]="mainMenuItems"
-  ></app-game-menu>
+    <app-game-menu [menuItems]="mainMenuItems"></app-game-menu>
   </ng-template>
 
   <ng-template #pauseMenu>
-    <app-game-menu
-    [menuItems]="pauseMenuItems"
-    ></app-game-menu>
+    <app-game-menu [menuItems]="pauseMenuItems"></app-game-menu>
   </ng-template>
 
   <ng-template #gameOverMenu>
-    <app-game-menu
-    [menuItems]="gameOverMenuItems"
-  ></app-game-menu>
+    <app-game-menu [menuItems]="gameOverMenuItems"></app-game-menu>
   </ng-template>
-
 </div>

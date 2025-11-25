@@ -5,7 +5,7 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 // import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
-import { gameNames, GameService } from 'app/modules/home/services/game/game.service';
+import { gameNames, GameService } from 'app/modules/home/services/game.service';
 import { map } from 'rxjs';
 
 type MayorMenorRow = { user: string; score: number; registered: Date };
@@ -81,19 +81,6 @@ export class RankingComponent implements OnInit {
       rows.sort((a, b) => b.ratio - a.ratio);
       this.ahorcadoDS.data = rows;
       queueMicrotask(() => (this.ahorcadoDS.sort = this.sortAH));
-    });
-
-    // Conecta 4
-    this.gameService.getConectaCuatroStatsForAllUsers().then(statsMap => {
-      const rows: Conecta4Row[] = Object.keys(statsMap).map(email => ({
-        user: email,
-        total: statsMap[email].total,
-        rojo: statsMap[email].rojo,
-        amarillo: statsMap[email].amarillo,
-      }));
-      rows.sort((a, b) => b.total - a.total);
-      this.conectaCuatroDS.data = rows;
-      queueMicrotask(() => (this.conectaCuatroDS.sort = this.sortC4));
     });
 
     // Preguntados

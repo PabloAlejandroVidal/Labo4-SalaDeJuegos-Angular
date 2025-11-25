@@ -1,32 +1,39 @@
 .keyboard {
-  bottom: 0;
-  left: 0;
+  width: 100%;
+  padding: 0.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  padding: 1em;
+  gap: 0.35rem;
+
+  /* evita que el teclado crezca más que el área disponible */
+  flex: 0 0 auto;
+  max-height: 180px;
+  overflow: hidden;
 }
 
-.keysLine{
+.keysLine {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 90%;
+  gap: 0.35rem;
 }
 
 .key {
-  padding: .2vw;
-  flex: 1 1 100%;
-  max-width: 10%;
-  font-size: 2.8vh;
-  border-radius: .2em;
+  flex: 1 1 0;
+  padding: 0.4rem 0.6rem;
+  font-size: 1rem;
+  border-radius: 0.35rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
   cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
 
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+  }
 }
 
 .key:disabled {
-  background-color: #ccc;
-  cursor: auto;
+  background-color: rgba(150,150,150,0.35);
+  cursor: default;
 }

@@ -1,8 +1,56 @@
+<div class="auth-page">
+  <div class="auth-shell">
+    <header class="auth-header">
+      <div class="header-text">
+        <h1 class="app-title">Sala de Juegos</h1>
+        <p class="app-subtitle">
+          Iniciá sesión o registrate para guardar tus puntajes.
+        </p>
+      </div>
+    </header>
 
-<div class="auth">
-  <router-outlet></router-outlet>
-  <div class="btns-content">
-    <button class="btn-design btn-design-form btn-jump" *ngIf="isLoginRouteActive()" (click)="goRegister()">Ir a la página registro</button>
-    <button class="btn-design btn-design-form btn-jump" *ngIf="isRegisterRouteActive()" (click)="goLogin()">Ir a la página login</button>
+    <nav class="auth-switch">
+      <button
+        mat-button
+        class="switch-btn"
+        [class.active]="isLoginRouteActive"
+        (click)="goLogin()"
+      >
+        Iniciar sesión
+      </button>
+
+      <button
+        mat-button
+        class="switch-btn"
+        [class.active]="isRegisterRouteActive"
+        (click)="goRegister()"
+      >
+        Registrarse
+      </button>
+    </nav>
+
+    <section class="auth-body">
+      <router-outlet></router-outlet>
+    </section>
+
+    <footer class="auth-footer">
+      <span *ngIf="isLoginRouteActive">
+        ¿Es tu primera vez?
+        <button mat-button class="inline-link" (click)="goRegister()">
+          Crear cuenta
+        </button>
+      </span>
+
+      <span *ngIf="isRegisterRouteActive">
+        ¿Ya tenés cuenta?
+        <button mat-button class="inline-link" (click)="goLogin()">
+          Iniciar sesión
+        </button>
+      </span>
+    </footer>
   </div>
+
+  <!-- Orbes decorativos, igual que en Home -->
+  <div class="auth-orb orb-1"></div>
+  <div class="auth-orb orb-2"></div>
 </div>
