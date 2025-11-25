@@ -170,3 +170,62 @@
   display: flex;
   flex-direction: column;
 }
+
+
+
+
+/* ------------------------------------
+   TOP BAR DEL SIDE PANEL
+------------------------------------- */
+.side-top-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+
+  padding: 0.5rem;
+  border-radius: 0.6rem;
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(0,255,255,0.18);
+}
+
+/* Botones del top bar */
+.top-btn {
+  flex: 1;
+  padding: 0.35rem 0.6rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: #dfffff;
+  background: rgba(0,255,255,0.15);
+  border: 1px solid rgba(0,255,255,0.25);
+  transition: background 0.25s, transform 0.15s ease;
+
+  &:hover {
+    background: rgba(0,255,255,0.28);
+    transform: translateY(-1px);
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Botón de volver más pequeño */
+.top-btn.back {
+  flex: 0 0 40px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+/* Estilos particulares */
+.top-btn.logout {
+  background: rgba(255,0,70,0.22);
+  border-color: rgba(255,0,70,0.35);
+
+  &:hover {
+    background: rgba(255,0,70,0.35);
+  }
+}

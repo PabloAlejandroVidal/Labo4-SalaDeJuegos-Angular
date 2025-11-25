@@ -2,17 +2,34 @@
 
   <div class="games-shell">
 
-    <!-- COLUMNA IZQUIERDA -->
-    <aside class="side-panel">
+<aside class="side-panel">
 
-      <app-user-panel (btnClicked)="handleEvent($event)"></app-user-panel>
+  <!-- TOP BAR (volver, chat y logout en línea) -->
+  <div class="side-top-bar">
+    <button class="top-btn back" (click)="goBack()">←</button>
 
-      <!-- Chat PERMANENTE debajo del user panel -->
-      <div class="left-chat-container" *ngIf="chatVisible">
-        <app-chat></app-chat>
-      </div>
+    <button
+      class="top-btn chat"
+      (click)="chatVisible = !chatVisible">
+      Chat
+    </button>
 
-    </aside>
+    <button
+      class="top-btn logout"
+      (click)="logout()">
+      Logout
+    </button>
+  </div>
+
+  <app-user-panel (btnClicked)="handleEvent($event)"></app-user-panel>
+
+  <!-- Chat permanente debajo -->
+  <div class="left-chat-container" *ngIf="chatVisible">
+    <app-chat></app-chat>
+  </div>
+
+</aside>
+
 
     <!-- COLUMNA DERECHA -->
     <section class="games-panel">

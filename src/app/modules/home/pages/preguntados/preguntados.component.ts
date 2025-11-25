@@ -75,6 +75,7 @@ export class PreguntadosComponent {
   gameOverMenuItems = [this.menuOptions.restart, this.menuOptions.goRanking, this.menuOptions.goHelp, this.menuOptions.exit];
 
   async ngOnInit() {
+    console.log("preguntados")
     this.user = this.userService.currentUser;
     const subscription: Subscription = this.gameService.observeScore(this.user, gameNames.preguntados).subscribe((docScore)=>{
       this.record = docScore.score;
