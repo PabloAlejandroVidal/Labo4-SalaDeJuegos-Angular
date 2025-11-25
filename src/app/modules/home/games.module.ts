@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameCardComponent } from './components/game-card/game-card.component';
 import { GamesListComponent } from './pages/games-list/games-list.component';
-import { HomeRoutingModule } from './home-routing.module';
+import { HomeRoutingModule } from './games-routing.module';
 import { GameService } from './services/game.service';
 import { AhorcadoGameComponent } from './pages/ahorcado-game/ahorcado-game.component';
 import { SalaDeJuegosComponent } from './sala-de-juegos/sala-de-juegos.component';
@@ -73,4 +73,4 @@ import { GameCountdownComponent } from './components/game-countdown/game-countdo
   ]
 
 })
-export class HomeModule { }
+export class GamesModule { }

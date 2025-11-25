@@ -66,6 +66,8 @@
   position: relative;
   width: 100%;
   height: 100%;
+  max-width: 600px;   /* 👈 el juego no se estira infinito en desktop */
+  margin: 0 auto;     /* 👈 centrado horizontal */
   overflow: hidden;
 }
 
@@ -181,26 +183,28 @@
   background-position: 50% 0%;
 }
 
+/* Frutas: tamaño relativo al tablero, no al viewport */
 .fruit {
   position: absolute;
   z-index: 10;
-  transform: translate(-50%, -50%); /* centra el img en left/top */
-  width: 12vmin; /* ajustable */
-  will-change: top, left, transform;
+  transform: translate(-50%, -50%);
+  /* ancho relativo al board, acotado entre 40px y 80px aprox */
+  width: clamp(40px, 9%, 80px);
   aspect-ratio: 1;
+  will-change: top, left, transform;
+  transition: opacity 0.6s ease;
 }
 
+/* La imagen rellena el contenedor .fruit */
 .fruit img {
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   user-select: none;
   -webkit-user-drag: none;
 }
 
-.fruit {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.6s ease;
-}
 .fruit.slicing {
   opacity: 0;
   animation: jumpAndDie 1s linear;

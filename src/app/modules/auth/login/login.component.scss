@@ -1,27 +1,71 @@
+/* Login dentro del panel de Auth: NO usar 100vh acá */
+
+/* Contenedor raíz del componente */
 .form-page {
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: transparent;
 }
 
+/* Caja del formulario */
 .form-container {
   width: 100%;
-
-}
-
-/* IMPORTANTE: que el form no tenga un ancho fijo “raro” */
-.form {
-  width: 100%;
-  max-width: 100%;
+  padding: 12px 4px 4px;
   box-sizing: border-box;
+
+  /* usa tu paleta global */
+  background: var(--app-form-bg);
+  color: var(--app-form-fg);
+
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 12px;
+}
 
-  /* Quitamos sombras/fondos fuertes si molestan dentro del panel */
-  background: transparent;
-  border-radius: 0;
-  box-shadow: none;
-  padding-block: 0;
+/* Título del formulario */
+.form-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Layout del formulario en sí */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ancho full para los mat-form-field */
+.w-100 {
+  width: 100%;
+}
+
+/* fila de botones */
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.btn-row > button {
+  flex: 1 1 0;
+}
+
+.mt-2 {
+  margin-top: 8px;
+  display: block;
+}
+
+/* Mobile: menos sombra, más compacto */
+@media (max-width: 600px) {
+  .form-container {
+    padding: 10px 2px 4px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  }
 }

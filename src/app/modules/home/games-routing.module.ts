@@ -17,7 +17,7 @@ const routes: Routes = [
       { path: GAMES_ROUTES.AHORCADO, component: AhorcadoGameComponent },
       { path: GAMES_ROUTES.MAYOR_MENOR, component: MayorMenorComponent },
       { path: GAMES_ROUTES.PREGUNTADOS, component: PreguntadosComponent },
-      // { path: GAMES_ROUTES.FRUIT_CATCHER, component: FruitCatcherComponent },
+      { path: GAMES_ROUTES.FRUIT_CATCHER, component: FruitCatcherComponent },
       { path: '**', component: GamesListComponent },
       ]
   }

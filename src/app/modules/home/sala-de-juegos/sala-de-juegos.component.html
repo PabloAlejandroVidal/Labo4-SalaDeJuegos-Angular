@@ -1,13 +1,28 @@
-<div class="home">
+<div class="games-root">
 
-  <div class="user-container">
-    <app-user-panel (btnClicked)="handleEvent($event)"></app-user-panel>
-  </div>
-  <div class="games-container">
-    <router-outlet></router-outlet>
-    <!-- <div [ngClass]="{'hidden': !chatVisible}" class="chat-container">
-      <app-chat></app-chat>
-    </div> -->
+  <div class="games-shell">
+
+    <!-- COLUMNA IZQUIERDA -->
+    <aside class="side-panel">
+
+      <app-user-panel (btnClicked)="handleEvent($event)"></app-user-panel>
+
+      <!-- Chat PERMANENTE debajo del user panel -->
+      <div class="left-chat-container" *ngIf="chatVisible">
+        <app-chat></app-chat>
+      </div>
+
+    </aside>
+
+    <!-- COLUMNA DERECHA -->
+    <section class="games-panel">
+      <div class="games-main">
+        <router-outlet></router-outlet>
+      </div>
+    </section>
+
   </div>
 
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
 </div>

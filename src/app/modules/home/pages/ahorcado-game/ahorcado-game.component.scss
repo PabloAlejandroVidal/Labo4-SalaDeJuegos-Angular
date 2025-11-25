@@ -1,110 +1,150 @@
+@use 'index' as *;
+
 .game {
   position: relative;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  overflow: hidden;
   height: 100%;
-}
-
-
-.main-image-container {
-  position: relative;
-  text-align: center;
   overflow: hidden;
 }
 
-.main-image {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.repeated-image-cont {
-  color: white;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  height: max-content;
-  width: 5%;
-  right: 0;
-  bottom: 10em;
-}
-.repeated-letter{
-  position: relative;
-  font-size: 2.5vw;
-  left: 3%;
-}
-.repeated-image {
-  position: relative;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: auto;
-}
-
-.info-container{
+/* =========================
+   BARRA SUPERIOR DE INFO
+   ========================= */
+.info-container {
   width: 98%;
-  margin: 1%;
-  border-radius: .5em;
+  margin: 0.5rem auto;
+  border-radius: 0.5em;
   display: flex;
-  padding: .2em;
-  gap: .2em;
+  padding: 0.2em;
+  gap: 0.2em;
   justify-content: space-between;
   align-items: center;
   background-color: rgb(39, 81, 99);
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
+  flex: 0 0 auto;
 }
-.info-display{
+
+.info-display {
   flex-grow: 1;
   flex-basis: 50%;
   height: 100%;
-  padding: .2em .6em;
-  border-radius: .5em;
+  padding: 0.2em 0.6em;
+  border-radius: 0.5em;
   background-color: rgba(0, 0, 0, 0.5);
   color: rgb(249, 255, 163);
-
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.info-vidas{
+
+.info-vidas {
   display: flex;
-  justify-content: right;
-  gap: .2em;
+  justify-content: flex-end;
+  gap: 0.2em;
   height: 100%;
   flex-grow: 1;
   flex-basis: 50%;
-  padding: .2em .6em;
-  border-radius: .5em;
+  padding: 0.2em 0.6em;
+  border-radius: 0.5em;
   background-color: rgba(0, 0, 0, 0.5);
 }
-.vida-img{
+
+.vida-img {
   width: 2em;
   height: auto;
   object-fit: contain;
 }
 
-.game-end{
+/* =========================
+   ZONA CENTRAL: IMAGEN
+   ========================= */
+
+/* Contenedor que ocupa el espacio flexible entre barra y teclado */
+.main-image-container {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  overflow: hidden; // TODO lo que se pase se recorta visualmente
+}
+
+/* Wrapper relativo que NO puede ser más alto que el contenedor */
+.main-image-wrapper {
+  position: relative;
+  display: block;
+  height: 100%;      // 👈 toma el alto del main-image-container
+  max-height: 100%;  // 👈 nunca lo supera
+  max-width: 100%;   // 👈 tampoco supera el ancho
+}
+
+/* La imagen se escala para caber en el wrapper, priorizando altura */
+.main-image {
+  display: block;
+  height: 100%;       // 👈 se adapta a la altura disponible
+  max-height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain; // 👈 “contenida” dentro del wrapper
+}
+
+/* Letras superpuestas sobre la imagen (relativas al wrapper) */
+.repeated-image-cont {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 5%;
+  transform: translate(-50%, 0); // centra respecto a left
+  color: white;
+}
+
+.repeated-letter {
+  position: relative;
+  font-size: clamp(1rem, 2.5vw, 2rem);
+  left: 3%;
+}
+
+.repeated-image {
   width: 100%;
-  height: 100%;
+  height: auto;
+}
+
+/* =========================
+   OVERLAY FIN / MENÚ
+   ========================= */
+
+.game-end {
+  position: absolute;
+  inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.58);
 }
-.game-end__text{
+
+.game-end__text {
   width: 10em;
   background-color: white;
   padding: 1em;
-  border-radius: .2em;
+  border-radius: 0.2em;
 }
-app-game-menu{
+
+app-game-menu {
   width: 100%;
   height: 100%;
   position: absolute;
+}
+
+/* =========================
+   TECLADO ABAJO
+   ========================= */
+
+.keyboard-wrapper {
+  flex: 0 0 auto;
+  padding: 0.5rem 0.5rem 0.8rem;
 }
