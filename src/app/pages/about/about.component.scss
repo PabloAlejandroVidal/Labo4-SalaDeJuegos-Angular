@@ -1,22 +1,27 @@
 .about {
   position: static;
   max-width: 32em;
-  height: calc(100% + 3em);
+  /* height: calc(100% + 3em);  ❌ quitar */
   margin: 2em auto 1em auto;
-  transform: scale(.95);
+  padding: 1.5em;
+
   display: flex;
   flex-direction: column;
-  padding: 1.5em;
+
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 0 5px 2px rgba(0, 34, 96, 0.6);
-  transition: all 0.3s ease-in-out;
+
+  /* 👇 efecto sin romper layout */
+  transform: translateZ(0); /* crea contexto pero no modifica tamaño */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .about:hover {
-  transform: scale(1);
+  transform: scale(1.02); /* pequeño, no afecta al layout */
   box-shadow: 0 0 5px 4px rgba(0, 34, 96, 0.6);
 }
+
 
 .about__title {
   text-align: center;
@@ -58,4 +63,19 @@
 
 .about__img:hover {
 box-shadow: 0 0 10px 4px black;
+}
+
+.about__text {
+  padding: 0.6em;
+  font-size: 1.05em;
+}
+
+.about__img {
+  margin: 1.5em auto;
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  box-shadow: 0 0 6px rgba(0,0,0,0.25);
+  transition: box-shadow 0.3s ease-out;
 }

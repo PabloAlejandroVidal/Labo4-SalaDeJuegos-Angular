@@ -20,10 +20,16 @@ handleEvent(event: any) {
 
 ngOnInit(): void {
 }
-
 goBack() {
-  this.router.navigateByUrl('/games');
+  const current = this.router.url;
+
+  if (current === '/games' || current.startsWith('/games/')) {
+    this.router.navigateByUrl('/home');
+  } else {
+    this.router.navigateByUrl('/games');
+  }
 }
+
 
 logout() {
   this.auth.logout();
